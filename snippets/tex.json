@@ -1,0 +1,132 @@
+{
+  "template-beamer": {
+    "prefix": [
+      "template",
+      "beamer"
+    ],
+    "body": [
+      "\\documentclass{beamer}",
+      "\\usetheme{Madrid}",
+      "\\colorlet{beamer@blendedblue}{green!40!black}",
+      "\\setbeamertemplate{caption}[numbered]",
+      "\\usepackage{amssymb, amsmath, amsthm}",
+      "\\usepackage{physics}",
+      "\\usepackage{float, subcaption, graphicx}",
+      "\\usepackage{hyperref}",
+      "",
+      "\\title{$1}",
+      "\\author{Hunt Feng\\inst{1}}",
+      "\\institute[Usask]",
+      "{",
+      "\t\\inst{1}%",
+      "\tFaculty of Physics And Engineering Physics\\\\",
+      "\tUniversity of Saskatchewan",
+      "}",
+      "\\date{\\today}",
+      "",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "% define section page",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "\\AtBeginSection[]",
+      "{",
+      "\t\\begin{frame}{Outline of Presentation}",
+      "\t\t\\tableofcontents[currentsection]",
+      "\t\\end{frame}",
+      "}",
+      "",
+      "\\begin{document}",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "% title and TOC",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "\\maketitle",
+      "\\begin{frame}{Outline of Presentation}",
+      "\t\\tableofcontents",
+      "\\end{frame}",
+      "",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "% contents",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "$2",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "% references",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "\\newpage",
+      "\\begin{frame}[allowframebreaks]",
+      "\t\\bibliographystyle{abbrv}",
+      "\t\\bibliography{references}",
+      "\\end{frame}",
+      "\\end{document}"
+    ],
+    "description": "Beamer template"
+  },
+  "frame": {
+    "prefix": [
+      "frame",
+      "\\frame"
+    ],
+    "body": [
+      "\\begin{frame}{$1}",
+      "$2",
+      "\\end{frame}"
+    ],
+    "description": "Beamer frame environment"
+  },
+  "figure": {
+    "prefix": [
+      "figure",
+      "\\figure"
+    ],
+    "body": [
+      "\\begin{figure}[htbp!]",
+      "\t\\centering",
+      "\t\\includegraphics[width=0.7\\textwidth]{figures/$1}",
+      "\t\\caption{$2}",
+      "\t\\label{$3}",
+      "\\end{figure}"
+    ],
+    "description": "Figure environment"
+  },
+  "table": {
+    "prefix": [
+      "table",
+      "\\table"
+    ],
+    "body": [
+      "\\begin{table}[htbp!]",
+      "\t\\centering",
+      "\t\\begin{tabular}{|c|c|}",
+      "\t\t\\hline",
+      "\t\t  & \\",
+      "\t\t\\hline",
+      "\t\\end{tabular}",
+      "\t\\caption{$1}",
+      "\t\\label{$2}",
+      "\\end{table}"
+    ],
+    "description": "Table environment"
+  },
+  "enumerate": {
+    "prefix": [
+      "enumerate",
+      "\\enumerate"
+    ],
+    "body": [
+      "\\begin{enumerate}",
+      "\t\\item $1",
+      "\\end{enumerate}"
+    ],
+    "description": "Enumerate items"
+  },
+  "lstlisting": {
+    "prefix": [
+      "lstlisting",
+      "\\lstlisting"
+    ],
+    "body": [
+      "\\begin{lstlisting}[language=$1]",
+      "$2",
+      "\\end{lstlisting}"
+    ],
+    "description": "Code block"
+  }
+}

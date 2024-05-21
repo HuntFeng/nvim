@@ -1,0 +1,11 @@
+local opt = vim.opt
+opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+opt.number = true
+opt.relativenumber = true
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.expandtab = true
+opt.autoindent = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.signcolumn = "yes"
