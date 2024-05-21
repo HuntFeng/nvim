@@ -24,12 +24,21 @@ return {
 		local lsp_zero = require("lsp-zero")
 		lsp_zero.extend_lspconfig() -- must call this before the language server is manged by mason rather than manual config
 		lsp_zero.on_attach(function(client, bufnr)
-			-- use default keymaps for lsp functions
 			lsp_zero.default_keymaps({ buffer = bufnr })
 		end)
+		lsp_zero.set_sign_icons({
+			error = "",
+			warn = "",
+			info = "",
+			hint = "",
+		})
 
 		-- use mason to manage language servers
-		require("mason").setup({})
+		require("mason").setup({
+			ui = {
+				border = "rounded",
+			},
+		})
 		require("mason-null-ls").setup({
 			handlers = {},
 		})
@@ -52,7 +61,7 @@ return {
 
 		-- define keymaps for autocomplete
 		local cmp = require("cmp")
-		local cmp_format = require("lsp-zero").cmp_format({ details = true })
+		local cmp_format = lsp_zero.cmp_format({ details = true })
 		require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
 		-- require("luasnip.loaders.from_vscode").lazy_load()
 		cmp.setup({
