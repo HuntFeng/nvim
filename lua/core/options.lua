@@ -9,3 +9,5 @@ opt.autoindent = true
 opt.ignorecase = true
 opt.smartcase = true
 opt.signcolumn = "yes"
+opt.cmdheight = 0
+opt.showtabline = 2
