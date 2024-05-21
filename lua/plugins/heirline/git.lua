@@ -9,7 +9,7 @@ local Git = {
 		provider = function(self)
 			return "  " .. self.status_dict.head .. " "
 		end,
-		hl = { fg = colors.bg_dark, bold = true, bg = colors.blue },
+		hl = { fg = colors.blue, bg = colors.fg_gutter, bold = true },
 	},
 }
 

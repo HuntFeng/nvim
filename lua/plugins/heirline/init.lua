@@ -4,6 +4,7 @@ return {
 	-- to make sure all required plugins and colorschemes are loaded before setup
 	-- event = "UiEnter",
 	config = function()
+		local Vimode = require("plugins.heirline.vimode")
 		local Git = require("plugins.heirline.git")
 		local Diagnostics = require("plugins.heirline.diagnostics")
 		local LSPActive = require("plugins.heirline.lsp")
@@ -13,6 +14,7 @@ return {
 
 		require("heirline").setup({
 			statusline = {
+				Vimode,
 				Git,
 				Diagnostics,
 				Align,
