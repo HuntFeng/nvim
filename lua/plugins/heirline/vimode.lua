@@ -10,6 +10,7 @@ local ViMode = {
 			V = "Visual",
 			i = "Insert",
 			R = "Replace",
+			c = "Command",
 		},
 	},
 	provider = function(self)
