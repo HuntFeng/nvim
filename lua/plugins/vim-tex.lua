@@ -12,5 +12,5 @@ return {
 		)
 		vim.g.vimtex_view_general_options = options
 	end,
-	ft = "tex",
+	ft = { "tex" },
 }

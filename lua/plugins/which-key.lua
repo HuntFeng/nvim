@@ -1,13 +1,12 @@
 return {
-  "folke/which-key.nvim",
-  event = "VeryLazy",
-  init = function()
-    vim.o.timeout = true
-    vim.o.timeoutlen = 300
-  end,
-  opts = {
-    key_labels = {
-        ["<20>"] = "<leader>"
-    }
-  }
+	"folke/which-key.nvim",
+	init = function()
+		vim.o.timeout = true
+		vim.o.timeoutlen = 300
+	end,
+	opts = {
+		key_labels = {
+			["<20>"] = "<leader>",
+		},
+	},
 }
