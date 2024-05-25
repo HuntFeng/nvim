@@ -10,7 +10,7 @@ return {
 			dependencies = { "rafamadriz/friendly-snippets" },
 		},
 	},
-	event = "VeryLazy",
+	event = "InsertEnter",
 	config = function()
 		-- define keymaps for autocomplete
 		local cmp = require("cmp")

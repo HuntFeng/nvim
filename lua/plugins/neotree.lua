@@ -5,7 +5,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-		{ "nvim-tree/nvim-web-devicons", lazy = true },
+		"nvim-tree/nvim-web-devicons",
 	},
 	event = "VeryLazy",
 	config = function()

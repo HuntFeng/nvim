@@ -1,12 +1,11 @@
 return {
 	"echasnovski/mini.pairs",
 	version = false,
-	events = "VeryLazy",
-	config = function()
-		require("mini.pairs").setup({
-			mappings = {
-				["\\["] = { action = "open", pair = "\\[\\]", neigh_pattern = "[^\\]" },
-			},
-		})
-	end,
+	event = "VeryLazy",
+	opts = {
+		mappings = {
+			["\\("] = { action = "open", pair = "\\(\\)", neigh_pattern = "[^\\]" },
+			["\\["] = { action = "open", pair = "\\[\\]", neigh_pattern = "[^\\]" },
+		},
+	},
 }
