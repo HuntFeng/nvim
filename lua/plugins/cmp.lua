@@ -42,6 +42,9 @@ return {
 			},
 			--- (Optional) Show source name in completion menu
 			formatting = cmp_format,
+			experimental = {
+				ghost_text = true,
+			},
 		})
 	end,
 }
