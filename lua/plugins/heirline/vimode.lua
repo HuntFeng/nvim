@@ -11,9 +11,11 @@ local ViMode = {
 			i = "Insert",
 			R = "Replace",
 			c = "Command",
+			s = "Select",
 		},
 	},
 	provider = function(self)
+		print("mode = ", self.mode)
 		local mode = self.mode:sub(1, 1)
 		return " " .. self.mode_names[mode] .. " "
 	end,
