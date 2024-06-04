@@ -50,6 +50,14 @@ return {
 								},
 							},
 						}
+					elseif server_name == "clangd" then
+						-- do this otherwise neovim warns about the multiple offset-encoding is not supported
+						opts = {
+							cmd = {
+								"clangd",
+								"--offset-encoding=utf-16",
+							},
+						}
 					end
 					lspconfig[server_name].setup(opts)
 				end,
