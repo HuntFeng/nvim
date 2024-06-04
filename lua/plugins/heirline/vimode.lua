@@ -12,12 +12,12 @@ local ViMode = {
 			R = "Replace",
 			c = "Command",
 			s = "Select",
+			t = "Terminal",
 		},
 	},
 	provider = function(self)
-		print("mode = ", self.mode)
 		local mode = self.mode:sub(1, 1)
-		return " " .. self.mode_names[mode] .. " "
+		return " " .. (self.mode_names[mode] or "") .. " "
 	end,
 	hl = { bg = colors.blue, fg = colors.bg_dark, bold = true },
 	update = {

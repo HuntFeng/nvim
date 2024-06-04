@@ -11,13 +11,15 @@ return {
 		local Ruler = require("plugins.heirline.ruler")
 		local Align = { provider = "%=" }
 		local BufferLine = require("plugins.heirline.tabline")
+		local FileNameBlock = require("plugins.heirline.file")
 
 		require("heirline").setup({
 			statusline = {
 				Vimode,
 				Git,
-				Diagnostics,
+				FileNameBlock,
 				Align,
+				Diagnostics,
 				LSPActive,
 				Ruler,
 			},

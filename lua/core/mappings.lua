@@ -87,3 +87,11 @@ map(
 	"<Esc><Cmd>lua require('Comment.api').locked('toggle.linewise')(vim.fn.visualmode())<CR>",
 	{ desc = "Toggle comment for selection" }
 )
+
+-- terminal
+map("n", "<C-`>", "<cmd>ToggleTerm size=10 direction=horizontal<CR>", { desc = "ToggleTerm horizontal split" })
+map("t", "<C-`>", "<cmd>ToggleTerm size=10 direction=horizontal<CR>", { desc = "ToggleTerm horizontal split" })
+map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window", remap = true })
+map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window", remap = true })
+map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window", remap = true })
+map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window", remap = true })
