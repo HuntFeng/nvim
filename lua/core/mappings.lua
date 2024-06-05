@@ -76,6 +76,9 @@ map("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
 -- lsp
 map("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
 map("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "LSP Restart" })
+map("n", "<leader>la", function()
+	vim.lsp.buf.code_action()
+end, { desc = "LSP Action" })
 
 -- comment
 map("n", "<leader>/", function()
