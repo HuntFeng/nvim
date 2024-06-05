@@ -65,20 +65,26 @@ map("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy" })
 -- neo-tree
 map("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "NeoTree" })
 
--- reserve s for surround plugin
-map("n", "s", "")
-
 -- telescope
 map("n", "<leader>ff", "<cmd>Telescope git_files<cr>", { desc = "Find Git Files" })
 map("n", "<leader>fF", "<cmd>Telescope find_files<cr>", { desc = "Find All Files" })
 map("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
 
 -- lsp
+map("n", "gS", function()
+	vim.lsp.buf.signature_help()
+end, { desc = "Show function signature help" })
 map("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
-map("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "LSP Restart" })
+map("n", "<leader>lR", "<cmd>LspRestart<cr>", { desc = "LSP Restart" })
 map("n", "<leader>la", function()
 	vim.lsp.buf.code_action()
 end, { desc = "LSP Action" })
+map("n", "<leader>lf", function()
+	vim.lsp.buf.format()
+end, { desc = "Format Code" })
+map("n", "<leader>lr", function()
+	vim.lsp.buf.format()
+end, { desc = "Rename Symbol" })
 
 -- comment
 map("n", "<leader>/", function()
