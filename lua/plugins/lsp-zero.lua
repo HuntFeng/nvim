@@ -46,6 +46,7 @@ return {
 					"cuda",
 					"proto",
 					"cpp",
+					"python",
 				},
 			},
 		})
