@@ -23,10 +23,6 @@ map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Wi
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Move Lines
-map("v", "<S-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
-map("v", "<S-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
-map("v", "<S-h>", "<gv")
-map("v", "<S-l>", ">gv")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 map("n", "<cr>", "o<esc>", { desc = "New line" })

@@ -9,6 +9,5 @@ opt.autoindent = true
 opt.ignorecase = true
 opt.smartcase = true
 opt.signcolumn = "yes" -- always show signcolumn for lsp diags
-opt.cmdheight = 0 -- auto hide line for command
 opt.showtabline = 2 -- show tab line
 opt.laststatus = 3 -- show global status line only
