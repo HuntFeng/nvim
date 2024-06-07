@@ -39,6 +39,8 @@ map("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Delete Window", remap = tr
 map("n", "<leader>Q", "<cmd>confirm qall<cr>", { desc = "Delete Window", remap = true })
 map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
+map("n", "-", "<C-W>s", { desc = "Split Window Below", remap = true })
+map("n", "|", "<C-W>v", { desc = "Split Window Right", remap = true })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
