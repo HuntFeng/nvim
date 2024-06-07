@@ -93,7 +93,7 @@ FileNameBlock = {
 		condition = function(self)
 			return vim.api.nvim_get_option_value("buftype", { buf = self.bufnr }) == "terminal"
 		end,
-		provider = "                                 ",
+		provider = "",
 		hl = { bg = colors.bg_dark },
 	},
 }
