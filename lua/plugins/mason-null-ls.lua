@@ -5,7 +5,9 @@ return {
 		"nvimtools/none-ls.nvim",
 		"williamboman/mason-lspconfig.nvim",
 	},
-	event = "BufReadPre",
+	-- event = "BufEnter",
+	-- event = "BufReadPre",
+	-- event = "VeryLazy",
 	config = function()
 		-- use mason to manage language servers
 		require("mason").setup({
@@ -57,6 +59,10 @@ return {
 								"clangd",
 								"--offset-encoding=utf-16",
 							},
+						}
+					elseif server_name == "marksman" then
+						opts = {
+							filetypes = { "markdown", "quarto" },
 						}
 					end
 					lspconfig[server_name].setup(opts)
