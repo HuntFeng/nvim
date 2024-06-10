@@ -5,8 +5,8 @@ return {
 	},
 	{
 		-- navigate, manipulate and run cells
-		-- "HuntFeng/NotebookNavigator.nvim",
-		dir = "~/projects/NotebookNavigator.nvim",
+		"HuntFeng/NotebookNavigator.nvim",
+		-- dir = "~/projects/NotebookNavigator.nvim",
 		dependencies = {
 			"benlubas/molten-nvim",
 			"anuvyklack/hydra.nvim",
