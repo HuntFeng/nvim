@@ -25,7 +25,7 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 -- Move Lines
 map("v", "<", "<gv")
 map("v", ">", ">gv")
-map("n", "<cr>", "o<esc>", { desc = "New line" })
+map("n", "<S-cr>", "o<esc>", { desc = "New line" })
 
 -- buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
