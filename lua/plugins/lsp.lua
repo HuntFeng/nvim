@@ -19,7 +19,7 @@ return {
 		end,
 	},
 	{
-    -- mason for handling the language servers
+		-- mason for handling the language servers
 		"jay-babu/mason-null-ls.nvim",
 		dependencies = {
 			"williamboman/mason.nvim",
@@ -28,6 +28,52 @@ return {
 		},
 		lazy = false,
 		config = function()
+			-- lsp zero
+			local lsp_zero = require("lsp-zero")
+			lsp_zero.extend_lspconfig() -- must call this before the language server is manged by mason rather than manual config
+			lsp_zero.on_attach(function(client, bufnr)
+				lsp_zero.default_keymaps({
+					buffer = bufnr,
+					exclude = { "gs" }, -- reserve this for mini.surround
+					-- vim.keymap.set("n", "gS", function()
+					-- 	vim.lsp.buf.signature_help()
+					-- end, { desc = "Show function signature help" }),
+				})
+			end)
+			lsp_zero.format_on_save({
+				servers = {
+					["null-ls"] = {
+						"html",
+						"css",
+						"javascript",
+						"less",
+						"json",
+						"vue",
+						"javascriptreact",
+						"typescriptreact",
+						"jsonc",
+						"yaml",
+						"markdown.mdx",
+						"graphql",
+						"handlebars",
+						"svelte",
+						"astro",
+						"markdown",
+						"typescript",
+						"scss",
+						"lua",
+						"luau",
+						"c",
+						"cs",
+						"java",
+						"cuda",
+						"proto",
+						"cpp",
+						"python",
+					},
+				},
+			})
+
 			-- use mason to manage language servers
 			require("mason").setup({
 				ui = {
@@ -91,46 +137,6 @@ return {
 
 			-- null-ls for formatting
 			require("null-ls").setup({})
-
-			-- lsp zero
-			local lsp_zero = require("lsp-zero")
-			lsp_zero.extend_lspconfig() -- must call this before the language server is manged by mason rather than manual config
-			lsp_zero.on_attach(function(client, bufnr)
-				lsp_zero.default_keymaps({ buffer = bufnr })
-			end)
-			lsp_zero.format_on_save({
-				servers = {
-					["null-ls"] = {
-						"html",
-						"css",
-						"javascript",
-						"less",
-						"json",
-						"vue",
-						"javascriptreact",
-						"typescriptreact",
-						"jsonc",
-						"yaml",
-						"markdown.mdx",
-						"graphql",
-						"handlebars",
-						"svelte",
-						"astro",
-						"markdown",
-						"typescript",
-						"scss",
-						"lua",
-						"luau",
-						"c",
-						"cs",
-						"java",
-						"cuda",
-						"proto",
-						"cpp",
-						"python",
-					},
-				},
-			})
 		end,
 	},
 }
