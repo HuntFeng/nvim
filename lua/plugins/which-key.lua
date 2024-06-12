@@ -15,8 +15,13 @@ return {
 			-- telescope
 			f = {
 				name = "File",
-				f = { "<cmd>Telescope git_files<cr>", "Find Git Files" },
-				F = { "<cmd>Telescope find_files<cr>", "Find All Files" },
+				f = { "<cmd>Telescope find_files<cr>", "Find Files" },
+				F = {
+					function()
+						require("telescope.builtin").find_files({ no_ignore = true })
+					end,
+					"Find All Files",
+				},
 				w = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
 			},
 			-- lsp
@@ -38,13 +43,18 @@ return {
 				},
 				r = {
 					function()
-						vim.lsp.buf.format()
+						vim.lsp.buf.rename()
 					end,
 					"Rename Symbol",
 				},
+				d = { "<cmd>Telescope diagnostics", "Diagnostics" },
 			},
 			-- save file
-			w = { "<cmd>w<cr><esc>", "Save File" },
+			w = { "<cmd>w<cr>", "Save File" },
 		}, { prefix = "<leader>" })
+
+		wk.register({
+			l = { name = "VimTex", "VimTex", "VimTex" },
+		}, { prefix = "<localleader>" })
 	end,
 }

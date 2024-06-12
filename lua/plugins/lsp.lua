@@ -71,6 +71,7 @@ return {
 						"cpp",
 						"python",
 					},
+					["texlab"] = { "tex" },
 				},
 			})
 
@@ -125,10 +126,6 @@ return {
 									"--offset-encoding=utf-16",
 								},
 							}
-						elseif server_name == "marksman" then
-							opts = {
-								filetypes = { "markdown", "quarto" },
-							}
 						end
 						lspconfig[server_name].setup(opts)
 					end,
@@ -136,7 +133,8 @@ return {
 			})
 
 			-- null-ls for formatting
-			require("null-ls").setup({})
+			local null_ls = require("null-ls")
+			null_ls.setup({})
 		end,
 	},
 }

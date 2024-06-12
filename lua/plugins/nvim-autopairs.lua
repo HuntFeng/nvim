@@ -7,6 +7,8 @@ return {
 		npairs.setup({})
 		npairs.add_rules({
 			Rule("$", "$", "tex"),
+			Rule("\\(", "\\)", "tex"),
+			Rule("\\[", "\\]", "tex"),
 			Rule("```", "```", "quarto"),
 		})
 	end,
