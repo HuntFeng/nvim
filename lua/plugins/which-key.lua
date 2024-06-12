@@ -47,7 +47,7 @@ return {
 					end,
 					"Rename Symbol",
 				},
-				d = { "<cmd>Telescope diagnostics", "Diagnostics" },
+				d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
 			},
 			-- save file
 			w = { "<cmd>w<cr>", "Save File" },
