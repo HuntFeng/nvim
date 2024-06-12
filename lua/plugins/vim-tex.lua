@@ -1,3 +1,4 @@
+-- need to do pip3 install neovim-remote in order to use nvr
 return {
 	"lervag/vimtex",
 	init = function()
