@@ -28,6 +28,7 @@ return {
 			l = {
 				name = "LSP",
 				i = { "<cmd>LspInfo<cr>", "LSP Info" },
+				l = { "<cmd>LspLog<cr>", "LSP Log" },
 				R = { "<cmd>LspRestart<cr>", "LSP Restart" },
 				a = {
 					function()
