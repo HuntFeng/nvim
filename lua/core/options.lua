@@ -11,3 +11,5 @@ opt.smartcase = true
 opt.signcolumn = "yes" -- always show signcolumn for lsp diags
 opt.showtabline = 2 -- show tab line
 opt.laststatus = 3 -- show global status line only
+opt.spell = true -- nable spelling check
+opt.spelllang = "en_us"
