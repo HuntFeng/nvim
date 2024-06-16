@@ -1,4 +1,41 @@
 {
+  "template-article": {
+    "prefix": [
+      "template",
+      "article"
+    ],
+    "body": [
+      "\\documentclass{article}",
+      "\\usepackage{amssymb, amsmath, amsthm}",
+      "\\usepackage{physics}",
+      "\\usepackage{float, subcaption, graphicx}",
+      "\\usepackage{hyperref}",
+      "",
+      "\\title{$1}",
+      "\\author{Hunt Feng\\inst{1}}",
+      "\\date{\\today}",
+      "",
+      "\\begin{document}",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "% title and TOC",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "\\maketitle",
+      "\\tableofcontents",
+      "",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "% contents",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "$2",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "% references",
+      "%%%%%%%%%%%%%%%%%%%%",
+      "\\newpage",
+      "\\bibliographystyle{abbrv}",
+      "\\bibliography{references}",
+      "\\end{document}"
+    ],
+    "description": "Article template"
+  },
   "template-beamer": {
     "prefix": [
       "template",
@@ -70,6 +107,19 @@
       "\\end{frame}"
     ],
     "description": "Beamer frame environment"
+  },
+  "equation": {
+    "prefix": [
+      "equation",
+      "\\equation"
+    ],
+    "body": [
+      "\\begin{equation}",
+      "$2",
+      "\t\\label{$1}",
+      "\\end{equation}"
+    ],
+    "description": "Equation environment"
   },
   "figure": {
     "prefix": [

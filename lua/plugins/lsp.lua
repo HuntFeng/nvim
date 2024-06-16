@@ -70,6 +70,7 @@ return {
 						"proto",
 						"cpp",
 						"python",
+						"gdscript",
 					},
 					["texlab"] = { "tex" },
 				},
@@ -134,7 +135,11 @@ return {
 
 			-- null-ls for formatting
 			local null_ls = require("null-ls")
-			null_ls.setup({})
+			null_ls.setup({
+				sources = {
+					null_ls.builtins.formatting.gdformat,
+				},
+			})
 		end,
 	},
 }
