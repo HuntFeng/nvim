@@ -110,8 +110,8 @@
   },
   "equation": {
     "prefix": [
-      "equation",
-      "\\equation"
+      "\\equation",
+      "equation"
     ],
     "body": [
       "\\begin{equation}",
