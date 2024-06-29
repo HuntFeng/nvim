@@ -9,20 +9,35 @@ return {
 		local wk = require("which-key")
 		wk.register({
 			-- neotree
-			e = { "<cmd>Neotree toggle<cr>", "NeoTree" },
+			e = {
+				function()
+					require("neo-tree.command").execute({ toggle = true })
+				end,
+				"Neotree Toggle",
+			},
 			-- lazy
 			L = { "<cmd>Lazy<cr>", "Lazy" },
 			-- telescope
 			f = {
 				name = "File",
-				f = { "<cmd>Telescope find_files<cr>", "Find Files" },
+				f = {
+					function()
+						require("telescope.builtin").find_files()
+					end,
+					"Find Files",
+				},
 				F = {
 					function()
 						require("telescope.builtin").find_files({ no_ignore = true })
 					end,
 					"Find All Files",
 				},
-				w = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
+				w = {
+					function()
+						require("telescope.builtin").live_grep()
+					end,
+					"Live Grep",
+				},
 			},
 			-- lsp
 			l = {
@@ -48,7 +63,12 @@ return {
 					end,
 					"Rename Symbol",
 				},
-				d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
+				d = {
+					function()
+						require("telescope.builtin").diagnostics()
+					end,
+					"Diagnostics",
+				},
 			},
 			-- save file
 			w = { "<cmd>w<cr>", "Save File" },

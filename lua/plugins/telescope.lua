@@ -6,7 +6,7 @@ return {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-tree/nvim-web-devicons",
 	},
-	event = "VeryLazy",
+	lazy = true,
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")

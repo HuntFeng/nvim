@@ -6,7 +6,7 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		lazy = true,
-		init = function()
+		config = function()
 			-- Disable automatic setup, we are doing it manually
 			vim.g.lsp_zero_extend_cmp = 0
 			vim.g.lsp_zero_extend_lspconfig = 0
@@ -26,7 +26,7 @@ return {
 			"nvimtools/none-ls.nvim",
 			"williamboman/mason-lspconfig.nvim",
 		},
-		lazy = false,
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			-- lsp zero
 			local lsp_zero = require("lsp-zero")

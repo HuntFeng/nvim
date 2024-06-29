@@ -4,10 +4,26 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
-		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		"nvim-tree/nvim-web-devicons",
+		{
+			-- display image in neovim
+			"3rd/image.nvim",
+			init = function()
+				package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua"
+				package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
+			end,
+			opts = {
+				backend = "kitty",
+				max_width = 100,
+				max_height = 12,
+				max_height_window_percentage = math.huge,
+				max_width_window_percentage = math.huge,
+				window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
+				window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+			},
+		},
 	},
-	event = "VeryLazy",
+	lazy = true,
 	config = function()
 		require("neo-tree").setup({
 			window = {
