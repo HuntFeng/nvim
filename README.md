@@ -8,6 +8,3 @@ pip install neovim-remote
 sudo apt install luarocks
 luarocks --local --lua-version=5.1 install magick
 ```
-
-## TODO
-- [ ] auto save/load molten session

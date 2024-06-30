@@ -28,10 +28,29 @@ return {
 		require("neo-tree").setup({
 			window = {
 				position = "float",
-				width = 10,
+				-- use popup to set width since it's floating window
+				popup = {
+					size = {
+						width = 35,
+					},
+				},
 				mappings = {
 					["h"] = "close_node",
 					["l"] = "open",
+				},
+			},
+			default_component_configs = {
+				git_status = {
+					symbols = {
+						added = "N",
+						modified = "M",
+						deleted = "D",
+						untracked = "",
+						ignored = "",
+						unstaged = "",
+						staged = "",
+						conflict = "",
+					},
 				},
 			},
 		})
