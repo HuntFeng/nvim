@@ -4,6 +4,7 @@ opt.number = true
 opt.relativenumber = true
 opt.tabstop = 2
 opt.shiftwidth = 2
+opt.linebreak = true -- wrap line after word
 opt.expandtab = true
 opt.autoindent = true
 opt.ignorecase = true
