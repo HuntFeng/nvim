@@ -15,8 +15,8 @@ return {
 		-- define keymaps for autocomplete
 		local cmp = require("cmp")
 		local cmp_format = require("lsp-zero").cmp_format({ details = true })
-		require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
-		-- require("luasnip.loaders.from_vscode").lazy_load()
+		require("luasnip.loaders.from_vscode").lazy_load() -- load friendly-snippets
+		require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } }) -- load custom snippets
 		cmp.setup({
 			window = {
 				completion = cmp.config.window.bordered(),
