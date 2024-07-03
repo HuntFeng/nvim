@@ -96,6 +96,46 @@
     ],
     "description": "Beamer template"
   },
+  "frac": {
+    "prefix": [
+      "\\frac",
+      "frac"
+    ],
+    "body": [
+      "\\frac{$1}{$2}"
+    ],
+    "description": "Fraction"
+  },
+  "cite": {
+    "prefix": [
+      "\\cite",
+      "cite"
+    ],
+    "body": [
+      "\\cite{$1}"
+    ],
+    "description": "Citation"
+  },
+  "large-round-bracket": {
+    "prefix": [
+      "\\left(",
+      "left("
+    ],
+    "body": [
+      "\\left($1\\right)"
+    ],
+    "description": "Large round bracket"
+  },
+  "large-square-bracket": {
+    "prefix": [
+      "\\left[",
+      "left["
+    ],
+    "body": [
+      "\\left[$1\\right]"
+    ],
+    "description": "Large square bracket"
+  },
   "frame": {
     "prefix": [
       "frame",
