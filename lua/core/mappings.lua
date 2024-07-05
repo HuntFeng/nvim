@@ -10,11 +10,17 @@ map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = tru
 map("n", "[[", "#")
 map("n", "]]", "*")
 
--- Move to window using the <ctrl> hjkl keys
+-- Move to window using the <ctrl>+hjkl keys
 map({ "n", "t" }, "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window", remap = true })
 map({ "n", "t" }, "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window", remap = true })
 map({ "n", "t" }, "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window", remap = true })
 map({ "n", "t" }, "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window", remap = true })
+
+-- move cursor in insert mode using <ctrl>+hjkl
+map("i", "<C-h>", "<Left>", { desc = "Move Cursor Left", remap = true })
+map("i", "<C-j>", "<Down>", { desc = "Move Cursor Down", remap = true })
+map("i", "<C-k>", "<Up>", { desc = "Move Cursor Up", remap = true })
+map("i", "<C-l>", "<Right>", { desc = "Move Cursor Right", remap = true })
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
@@ -25,7 +31,8 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 -- Move Lines
 map("v", "<", "<gv")
 map("v", ">", ">gv")
-map("n", "<S-cr>", "o<esc>", { desc = "New line" })
+-- map("n", "<S-cr>", "o<esc>", { desc = "New line" })
+map("n", "<cr>", "o<esc>", { desc = "New line" })
 
 -- buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
