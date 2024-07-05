@@ -35,9 +35,9 @@ return {
 				lsp_zero.default_keymaps({
 					buffer = bufnr,
 					exclude = { "gs" }, -- reserve this for mini.surround
-					-- vim.keymap.set("n", "gS", function()
-					-- 	vim.lsp.buf.signature_help()
-					-- end, { desc = "Show function signature help" }),
+					vim.keymap.set("n", "gS", function()
+						vim.lsp.buf.signature_help()
+					end, { desc = "Show function signature help" }),
 				})
 			end)
 			lsp_zero.format_on_save({
