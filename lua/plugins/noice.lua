@@ -12,8 +12,8 @@ return {
 				-- hover documentation / signature
 				hover = {
 					size = {
-						max_width = 40,
-						max_height = 50,
+						max_width = 50,
+						max_height = 10,
 					},
 				},
 				mini = {
