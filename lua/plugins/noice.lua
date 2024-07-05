@@ -9,6 +9,13 @@ return {
 		require("noice").setup({
 			-- make messages blends into the background
 			views = {
+				-- hover documentation / signature
+				hover = {
+					size = {
+						max_width = 40,
+						max_height = 50,
+					},
+				},
 				mini = {
 					win_options = {
 						winblend = 0,

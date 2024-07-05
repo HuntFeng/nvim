@@ -16,18 +16,21 @@ return {
 		require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } }) -- load custom snippets
 		require("luasnip.loaders.from_vscode").lazy_load() -- load friendly-snippets
 		local cmp = require("cmp")
-		local cmp_format = require("lsp-zero").cmp_format({ details = true })
+		local cmp_format = require("lsp-zero").cmp_format({ details = false, max_width = 30 })
 		cmp.setup({
 			window = {
 				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered(),
 			},
 			mapping = {
 				["<cr>"] = cmp.mapping.confirm({ select = false }),
 				["<esc>"] = cmp.mapping.abort(),
 				["<Up>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
 				["<Down>"] = cmp.mapping.select_next_item({ behavior = "select" }),
-				["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
 				["<Tab>"] = cmp.mapping.select_next_item({ behavior = "select" }),
+				["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
+				["<C-u>"] = cmp.mapping.scroll_docs(-4),
+				["<C-d>"] = cmp.mapping.scroll_docs(4),
 			},
 			sources = {
 				{ name = "nvim_lsp" },
