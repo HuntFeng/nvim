@@ -8,6 +8,10 @@
       {
         "language": "tex",
         "path": "./tex.json"
+      },
+      {
+        "language": "cuda",
+        "path": "./cuda.json"
       }
     ]
   }
