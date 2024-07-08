@@ -273,7 +273,7 @@
       "\\lstlisting"
     ],
     "body": [
-      "\\begin{lstlisting}[language=$1] \label{lst:$3}",
+      "\\begin{lstlisting}[language=$1] \\label{lst:$3}",
       "$2",
       "\\end{lstlisting}"
     ],
