@@ -10,7 +10,7 @@ return {
 		local LSPActive = require("plugins.heirline.lsp")
 		local Ruler = require("plugins.heirline.ruler")
 		local Align = { provider = "%=" }
-		local BufferLine = require("plugins.heirline.tabline")
+		-- local BufferLine = require("plugins.heirline.tabline")
 		local FileNameBlock = require("plugins.heirline.file")
 
 		require("heirline").setup({
@@ -23,7 +23,7 @@ return {
 				LSPActive,
 				Ruler,
 			},
-			tabline = { BufferLine },
+			-- tabline = { BufferLine },
 		})
 	end,
 }

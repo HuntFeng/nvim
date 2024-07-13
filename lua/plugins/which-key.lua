@@ -19,7 +19,13 @@ return {
 			L = { "<cmd>Lazy<cr>", "Lazy" },
 			-- telescope
 			f = {
-				name = "File",
+				name = "Fuzzy Find",
+				b = {
+					function()
+						require("telescope.builtin").buffers()
+					end,
+					"Find Buffers",
+				},
 				f = {
 					function()
 						require("telescope.builtin").find_files()

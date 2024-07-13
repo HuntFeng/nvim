@@ -31,7 +31,6 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 -- Move Lines
 map("v", "<", "<gv")
 map("v", ">", ">gv")
--- map("n", "<S-cr>", "o<esc>", { desc = "New line" })
 map("n", "<cr>", "o<esc>", { desc = "New line" })
 
 -- buffers
@@ -40,6 +39,20 @@ map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>c", "<cmd>confirm bd<cr>", { desc = "Close Buffer" })
+-- use tab to open buffer list in telescope
+map("n", "<Tab>", function()
+	require("telescope.builtin").buffers()
+end, { desc = "Buffers" })
+-- use number keys 1 to 5 to navigate between buffers
+for num = 1, 5 do
+	map("n", tostring(num), function()
+		local buffers = vim.api.nvim_list_bufs()
+		if num > 0 and num <= #buffers then
+			local buffer_handle = buffers[num]
+			vim.api.nvim_set_current_buf(buffer_handle)
+		end
+	end, { noremap = true, silent = true })
+end
 
 -- windows
 map("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Delete Window", remap = true })
