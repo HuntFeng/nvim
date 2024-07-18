@@ -7,7 +7,7 @@ return {
 		"MunifTanjim/nui.nvim",
 	},
 	opts = {
-		lang = "cpp",
+		lang = "python3",
 		image_support = true,
 	},
 }

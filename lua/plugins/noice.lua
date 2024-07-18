@@ -7,6 +7,18 @@ return {
 	},
 	config = function()
 		require("noice").setup({
+			cmdline = {
+				view = "cmdline",
+				format = {
+					cmdline = false,
+					filter = false,
+					lua = false,
+					help = false,
+					input = false,
+					search_up = false,
+					search_down = false,
+				},
+			},
 			-- make messages blends into the background
 			views = {
 				-- hover documentation / signature
@@ -29,12 +41,6 @@ return {
 					["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 				},
-			},
-			presets = {
-				bottom_search = false, -- a popup floating window for search
-				command_palette = true, -- position the cmdline and popupmenu together
-				long_message_to_split = true, -- long messages will be sent to a split
-				lsp_doc_border = true, -- use border on documentation
 			},
 			health = {
 				checker = false,

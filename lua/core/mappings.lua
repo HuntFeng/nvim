@@ -2,6 +2,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 local map = vim.keymap.set
 
+-- better escape
+map("i", "jk", "<esc>l", { silent = true })
+map("i", "jj", "<esc>l", { silent = true })
+
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -38,11 +42,9 @@ map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffers" })
+map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "<leader>c", "<cmd>confirm bd<cr>", { desc = "Close Buffer" })
--- use tab to open buffer list in telescope
-map("n", "<Tab>", function()
-	require("telescope.builtin").buffers()
-end, { desc = "Buffers" })
 -- use number keys 1 to 5 to navigate between buffers
 for num = 1, 5 do
 	map("n", tostring(num), function()
@@ -78,3 +80,6 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 -- terminal
 map({ "n", "t" }, "<C-`>", "<cmd>ToggleTerm size=10 direction=horizontal<CR>", { desc = "ToggleTerm horizontal split" })
+
+-- wrap
+map({ "n", "i", "x", "s" }, "<A-z>", "<cmd>set wrap!<cr>", { desc = "Wrap text" })

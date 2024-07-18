@@ -10,20 +10,20 @@ return {
 		local LSPActive = require("plugins.heirline.lsp")
 		local Ruler = require("plugins.heirline.ruler")
 		local Align = { provider = "%=" }
-		-- local BufferLine = require("plugins.heirline.tabline")
+		local BufferLine = require("plugins.heirline.tabline")
 		local FileNameBlock = require("plugins.heirline.file")
 
 		require("heirline").setup({
-			statusline = {
-				Vimode,
-				Git,
-				FileNameBlock,
-				Align,
-				Diagnostics,
-				LSPActive,
-				Ruler,
-			},
-			-- tabline = { BufferLine },
+			-- statusline = {
+			-- 	Vimode,
+			-- 	Git,
+			-- 	FileNameBlock,
+			-- 	Align,
+			-- 	Diagnostics,
+			-- 	LSPActive,
+			-- 	Ruler,
+			-- },
+			tabline = { BufferLine },
 		})
 	end,
 }
