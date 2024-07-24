@@ -71,6 +71,7 @@ return {
 						"cpp",
 						"python",
 						"gdscript",
+						"typst",
 					},
 					["texlab"] = { "tex" },
 				},

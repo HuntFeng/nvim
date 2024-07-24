@@ -9,7 +9,7 @@ return {
 			ignored_next_char = [=[[%w%%%'%[%"%.%`]]=],
 		})
 		npairs.add_rules({
-			Rule("$", "$", "tex"),
+			Rule("$", "$", { "tex", "typst" }),
 			Rule("\\(", "\\)", "tex"),
 			Rule("\\[", "\\]", "tex"),
 			Rule("```", "```", "quarto"),

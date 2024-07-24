@@ -7,81 +7,79 @@ return {
 	end,
 	config = function()
 		local wk = require("which-key")
-		wk.register({
-			-- neotree
-			e = {
+		wk.add({
+			{ "<leader>L", "<cmd>Lazy<cr>", desc = "Lazy" },
+			{
+				"<leader>e",
 				function()
 					require("neo-tree.command").execute({ toggle = true })
 				end,
-				"Neotree Toggle",
+				desc = "Neotree Toggle",
 			},
-			-- lazy
-			L = { "<cmd>Lazy<cr>", "Lazy" },
-			-- telescope
-			f = {
-				name = "Fuzzy Find",
-				b = {
-					function()
-						require("telescope.builtin").buffers()
-					end,
-					"Find Buffers",
-				},
-				f = {
-					function()
-						require("telescope.builtin").find_files()
-					end,
-					"Find Files",
-				},
-				F = {
-					function()
-						require("telescope.builtin").find_files({ no_ignore = true })
-					end,
-					"Find All Files",
-				},
-				w = {
-					function()
-						require("telescope.builtin").live_grep()
-					end,
-					"Live Grep",
-				},
+			{ "<leader>f", group = "Fuzzy Find" },
+			{
+				"<leader>fF",
+				function()
+					require("telescope.builtin").find_files({ no_ignore = true })
+				end,
+				desc = "Find All Files",
 			},
-			-- lsp
-			l = {
-				name = "LSP",
-				i = { "<cmd>LspInfo<cr>", "LSP Info" },
-				l = { "<cmd>LspLog<cr>", "LSP Log" },
-				R = { "<cmd>LspRestart<cr>", "LSP Restart" },
-				a = {
-					function()
-						vim.lsp.buf.code_action()
-					end,
-					"LSP Action",
-				},
-				f = {
-					function()
-						vim.lsp.buf.format()
-					end,
-					"Format Code",
-				},
-				r = {
-					function()
-						vim.lsp.buf.rename()
-					end,
-					"Rename Symbol",
-				},
-				d = {
-					function()
-						require("telescope.builtin").diagnostics()
-					end,
-					"Diagnostics",
-				},
+			{
+				"<leader>fb",
+				function()
+					require("telescope.builtin").buffers()
+				end,
+				desc = "Find Buffers",
 			},
-			-- save file
-			w = { "<cmd>w<cr>", "Save File" },
-		}, { prefix = "<leader>" })
-
-		wk.register({
-			l = { name = "VimTex", "VimTex", "VimTex" },
-		}, { prefix = "<localleader>" })
+			{
+				"<leader>ff",
+				function()
+					require("telescope.builtin").find_files()
+				end,
+				desc = "Find Files",
+			},
+			{
+				"<leader>fw",
+				function()
+					require("telescope.builtin").live_grep()
+				end,
+				desc = "Live Grep",
+			},
+			{ "<leader>l", group = "LSP" },
+			{ "<leader>lR", "<cmd>LspRestart<cr>", desc = "LSP Restart" },
+			{
+				"<leader>la",
+				function()
+					vim.lsp.buf.code_action()
+				end,
+				desc = "LSP Action",
+			},
+			{
+				"<leader>ld",
+				function()
+					require("telescope.builtin").diagnostics()
+				end,
+				desc = "Diagnostics",
+			},
+			{
+				"<leader>lf",
+				function()
+					vim.lsp.buf.format()
+				end,
+				desc = "Format Code",
+			},
+			{ "<leader>li", "<cmd>LspInfo<cr>", desc = "LSP Info" },
+			{ "<leader>ll", "<cmd>LspLog<cr>", desc = "LSP Log" },
+			{
+				"<leader>lr",
+				function()
+					vim.lsp.buf.rename()
+				end,
+				desc = "Rename Symbol",
+			},
+			{ "<leader>lR", "<cmd>LspRestart<cr>", desc = "Rename Symbol" },
+			{ "<leader>w", "<cmd>w<cr>", desc = "Save File" },
+			{ "<localleader>l", "VimTex", group = "VimTex" },
+		})
 	end,
 }
