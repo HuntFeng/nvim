@@ -16,11 +16,10 @@ return {
 		require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } }) -- load custom snippets
 		require("luasnip.loaders.from_vscode").lazy_load() -- load friendly-snippets
 		local cmp = require("cmp")
-		local cmp_format = require("lsp-zero").cmp_format({ details = false, max_width = 30 })
 		cmp.setup({
 			window = {
-				completion = cmp.config.window.bordered(),
-				documentation = cmp.config.window.bordered(),
+				completion = cmp.config.window.bordered({ border = "single" }),
+				documentation = cmp.config.window.bordered({ border = "single" }),
 			},
 			mapping = {
 				["<cr>"] = cmp.mapping.confirm({ select = false }),
@@ -44,8 +43,14 @@ return {
 					require("luasnip").lsp_expand(args.body)
 				end,
 			},
-			--- (Optional) Show source name in completion menu
-			formatting = cmp_format,
+			formatting = {
+				-- in rust, if we don't set menu to "", it shows up as long white spaces
+				fields = { "abbr", "kind", "menu" },
+				format = function(entry, vim_item)
+					vim_item.menu = ""
+					return vim_item
+				end,
+			},
 			experimental = {
 				ghost_text = true,
 			},

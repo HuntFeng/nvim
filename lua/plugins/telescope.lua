@@ -20,6 +20,7 @@ return {
 						["<C-j>"] = actions.move_selection_next,
 					},
 				},
+				borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 			},
 		})
 	end,
