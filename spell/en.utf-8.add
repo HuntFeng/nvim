@@ -34,3 +34,8 @@ collisionless
 Vlasov
 Larmor
 discretize
+linearizing
+eigenmode
+axisymmetric
+wavenumber
+Jacobian
