@@ -6,6 +6,7 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		lazy = true,
+		-- event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			-- Disable automatic setup, we are doing it manually
 			vim.g.lsp_zero_extend_cmp = 0

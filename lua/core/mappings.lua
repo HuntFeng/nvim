@@ -35,28 +35,16 @@ map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Wi
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Move Lines
-map("v", "<", "<gv")
-map("v", ">", ">gv")
 map("n", "<cr>", "o<esc>", { desc = "New line" })
 
 -- buffers
-map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffers" })
 map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "<leader>c", "<cmd>confirm bd<cr>", { desc = "Close Buffer" })
--- use number keys 1 to 5 to navigate between buffers
-for num = 1, 5 do
-	map("n", tostring(num), function()
-		local buffers = vim.api.nvim_list_bufs()
-		if num > 0 and num <= #buffers then
-			local buffer_handle = buffers[num]
-			vim.api.nvim_set_current_buf(buffer_handle)
-		end
-	end, { noremap = true, silent = true })
-end
 
 -- windows
 map("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Delete Window", remap = true })

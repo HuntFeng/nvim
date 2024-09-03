@@ -2,6 +2,7 @@ return {
 	"numToStr/Comment.nvim",
 	lazy = true,
 	init = function()
+		require("Comment").setup()
 		vim.keymap.set("n", "<leader>/", function()
 			return require("Comment.api").call(
 				"toggle.linewise." .. (vim.v.count == 0 and "current" or "count_repeat"),

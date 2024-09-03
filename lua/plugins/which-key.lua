@@ -34,16 +34,30 @@ return {
 			{
 				"<leader>ff",
 				function()
-					require("telescope.builtin").find_files()
+					require("telescope.builtin").find_files({ file_ignore_patterns = { "^public/" } })
 				end,
 				desc = "Find Files",
 			},
 			{
 				"<leader>fw",
 				function()
-					require("telescope.builtin").live_grep()
+					require("telescope.builtin").live_grep({ file_ignore_patterns = { "^public/", "%.lock" } })
 				end,
 				desc = "Live Grep",
+			},
+			{
+				"<leader>fs",
+				function()
+					require("telescope.builtin").lsp_document_symbols()
+				end,
+				desc = "LSP Document Symbols",
+			},
+			{
+				"<leader>fS",
+				function()
+					require("telescope.builtin").lsp_workspace_symbols()
+				end,
+				desc = "LSP Workspace Symbols",
 			},
 			{ "<leader>l", group = "LSP" },
 			{ "<leader>lR", "<cmd>LspRestart<cr>", desc = "LSP Restart" },
@@ -77,9 +91,38 @@ return {
 				end,
 				desc = "Rename Symbol",
 			},
-			{ "<leader>lR", "<cmd>LspRestart<cr>", desc = "Rename Symbol" },
+			{ "<leader>lR", "<cmd>LspRestart<cr>", desc = "LSP Restart" },
 			{ "<leader>w", "<cmd>w<cr>", desc = "Save File" },
 			{ "<localleader>l", "VimTex", group = "VimTex" },
+			{ "<leader>n", group = "neogen" },
+			{
+				"<leader>nf",
+				function()
+					require("neogen").generate({ type = "func" })
+				end,
+				desc = "Function Doc String",
+			},
+			{
+				"<leader>nc",
+				function()
+					require("neogen").generate({ type = "class" })
+				end,
+				desc = "Class Doc String",
+			},
+			{
+				"<leader>nt",
+				function()
+					require("neogen").generate({ type = "type" })
+				end,
+				desc = "Type Doc String",
+			},
+			{
+				"<leader>nm",
+				function()
+					require("neogen").generate({ type = "file" })
+				end,
+				desc = "Module/File Doc String",
+			},
 		})
 	end,
 }

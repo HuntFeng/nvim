@@ -19,6 +19,7 @@
   "mini.move": { "branch": "main", "commit": "9670fe1d19af3d9a69ddce920c527c883ca5dc4c" },
   "mini.surround": { "branch": "main", "commit": "d8913ed23be0a1a4585ae34414821cc343a46174" },
   "neo-tree.nvim": { "branch": "v3.x", "commit": "29f7c215332ba95e470811c380ddbce2cebe2af4" },
+  "neogen": { "branch": "main", "commit": "dc50715c009f89b8111197fd2f282f6042daa7ea" },
   "none-ls.nvim": { "branch": "main", "commit": "cb5bd2ffd81b7a3d264deebfe894388010381dc5" },
   "nui.nvim": { "branch": "main", "commit": "61574ce6e60c815b0a0c4b5655b8486ba58089a1" },
   "nvim-autopairs": { "branch": "master", "commit": "19606af7c039271d5aa96bceff101e7523af3136" },
@@ -32,6 +33,7 @@
   "telescope.nvim": { "branch": "master", "commit": "6312868392331c9c0f22725041f1ec2bef57c751" },
   "toggleterm.nvim": { "branch": "main", "commit": "48be57eaba817f038d61bbf64d2c597f578c0827" },
   "tokyonight.nvim": { "branch": "main", "commit": "b0e7c7382a7e8f6456f2a95655983993ffda745e" },
+  "vim-doge": { "branch": "master", "commit": "188351964c8b2540a69c1d2648b3c6e7877a016f" },
   "vim-visual-multi": { "branch": "master", "commit": "38b0e8d94a5499ccc17d6159763d32c79f53417b" },
   "vimtex": { "branch": "master", "commit": "76ef99f73a5ff10be59836a4af4f928eaa8ad284" },
   "which-key.nvim": { "branch": "main", "commit": "6c1584eb76b55629702716995cca4ae2798a9cca" }
