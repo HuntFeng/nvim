@@ -12,17 +12,19 @@ return {
 		local Align = { provider = "%=" }
 		local BufferLine = require("plugins.heirline.tabline")
 		local FileNameBlock = require("plugins.heirline.file")
+		local SearchCount = require("plugins.heirline.search-count")
 
 		require("heirline").setup({
-			-- statusline = {
-			-- 	Vimode,
-			-- 	Git,
-			-- 	FileNameBlock,
-			-- 	Align,
-			-- 	Diagnostics,
-			-- 	LSPActive,
-			-- 	Ruler,
-			-- },
+			statusline = {
+				Vimode,
+				-- Git,
+				FileNameBlock,
+				Align,
+				-- Diagnostics,
+				-- LSPActive,
+				SearchCount,
+				Ruler,
+			},
 			tabline = { BufferLine },
 		})
 	end,
