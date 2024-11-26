@@ -27,16 +27,6 @@ return {
 						preview_width = 0.6,
 					},
 				},
-				vimgrep_arguments = {
-					"rg",
-					"--color=never",
-					"--no-heading",
-					"--with-filename",
-					"--line-number",
-					"--column",
-					"--smart-case",
-					"-l",
-				},
 			},
 		})
 	end,
