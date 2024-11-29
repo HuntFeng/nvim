@@ -59,6 +59,20 @@ return {
 				end,
 				desc = "LSP Workspace Symbols",
 			},
+			{
+				"<leader>fi",
+				function()
+					require("telescope.builtin").lsp_incoming_calls()
+				end,
+				desc = "LSP Incoming Calls",
+			},
+			{
+				"<leader>fr",
+				function()
+					require("telescope.builtin").lsp_references()
+				end,
+				desc = "LSP References",
+			},
 			{ "<leader>l", group = "LSP" },
 			{ "<leader>lR", "<cmd>LspRestart<cr>", desc = "LSP Restart" },
 			{
@@ -82,10 +96,24 @@ return {
 				end,
 				desc = "Format Code",
 			},
-			{ "<leader>li", "<cmd>LspInfo<cr>", desc = "LSP Info" },
-			{ "<leader>ll", "<cmd>LspLog<cr>", desc = "LSP Log" },
+			{
+				"<leader>li",
+				function()
+					vim.lsp.buf.incoming_calls()
+				end,
+				desc = "LSP Incoming Calls",
+			},
 			{
 				"<leader>lr",
+				function()
+					vim.lsp.buf.references()
+				end,
+				desc = "LSP References",
+			},
+			{ "<leader>lI", "<cmd>LspInfo<cr>", desc = "LSP Info" },
+			{ "<leader>ll", "<cmd>LspLog<cr>", desc = "LSP Log" },
+			{
+				"<leader>lR",
 				function()
 					vim.lsp.buf.rename()
 				end,
