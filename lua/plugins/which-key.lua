@@ -74,7 +74,13 @@ return {
 				desc = "LSP References",
 			},
 			{ "<leader>l", group = "LSP" },
-			{ "<leader>lR", "<cmd>LspRestart<cr>", desc = "LSP Restart" },
+			{
+				"<leader>lR",
+				function()
+					vim.lsp.buf.rename()
+				end,
+				desc = "LSP Rename",
+			},
 			{
 				"<leader>la",
 				function()
@@ -119,7 +125,6 @@ return {
 				end,
 				desc = "Rename Symbol",
 			},
-			{ "<leader>lR", "<cmd>LspRestart<cr>", desc = "LSP Restart" },
 			{ "<leader>w", "<cmd>w<cr>", desc = "Save File" },
 			{ "<localleader>l", "VimTex", group = "VimTex" },
 			{ "<leader>n", group = "neogen" },

@@ -140,6 +140,19 @@ return {
 									outputPath = "$root/$dir/$name",
 								},
 							}
+						elseif server_name == "pylsp" then
+							opts = {
+								settings = {
+									pylsp = {
+										plugins = {
+											pycodestyle = {
+												ignore = { "E501" }, -- This is the Error code for line too long.
+												maxLineLength = 200, -- This sets how long the line is allowed to be. Also has effect on formatter.
+											},
+										},
+									},
+								},
+							}
 						end
 						lspconfig[server_name].setup(opts)
 					end,
