@@ -3,6 +3,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	callback = function()
 		local file = vim.fn.expand("%")
 		vim.fn.system("typstyle -i " .. file)
-		vim.cmd("edit!")
+		-- refresh the buffer if the file has been modified externally
+		vim.cmd("checktime")
 	end,
 })
