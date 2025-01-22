@@ -37,7 +37,7 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 -- Move Lines
 map("n", "<cr>", function()
 	if vim.bo.filetype == "qf" then
-		vim.api.nvim_input("V<cr>")
+		vim.api.nvim_input("<C-cr>")
 	else
 		vim.cmd("normal! o")
 	end
