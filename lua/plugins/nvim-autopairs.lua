@@ -12,7 +12,7 @@ return {
 			Rule("$", "$", { "tex", "typst" }),
 			Rule("\\(", "\\)", "tex"),
 			Rule("\\[", "\\]", "tex"),
-			Rule("```", "```", "quarto"),
+			Rule("```", "```", { "quarto", "typst" }),
 		})
 	end,
 }
