@@ -79,6 +79,9 @@ return {
 		"stevearc/conform.nvim",
 		"nvimtools/hydra.nvim",
 	},
+	cond = function()
+		return not vim.g.vscode
+	end,
 	config = function()
 		local otter = require("otter")
 		otter.setup({

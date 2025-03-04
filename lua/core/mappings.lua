@@ -1,6 +1,36 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
 local map = vim.keymap.set
+if vim.g.vscode then
+	local vscode = require("vscode")
+	map({ "n", "x" }, "<space>", function()
+		vscode.call("whichkey.show")
+	end, { noremap = true, nowait = true })
+
+	map("n", "za", function()
+		vscode.call("editor.toggleFold")
+	end)
+
+	map("n", "H", function()
+		vscode.action("workbench.action.previousEditorInGroup")
+	end, { desc = "Prev Tab" })
+	map("n", "L", function()
+		vscode.action("workbench.action.nextEditorInGroup")
+	end, { desc = "Next Tab" })
+	map("n", "[b", function()
+		vscode.action("workbench.action.previousEditorInGroup")
+	end, { desc = "Prev Tab" })
+	map("n", "]b", function()
+		vscode.action("workbench.action.nextEditorInGroup")
+	end, { desc = "Next Tab" })
+else
+	vim.g.mapleader = " "
+	map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+	map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+	map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+	map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+	map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffers" })
+	map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+end
+vim.g.maplocalleader = ","
 
 -- better escape
 map("i", "jk", "<esc>l", { silent = true })
@@ -44,12 +74,6 @@ map("n", "<cr>", function()
 end, { desc = "New line" })
 
 -- buffers
-map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffers" })
-map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "<leader>c", "<cmd>confirm bd<cr>", { desc = "Close Buffer" })
 
 -- windows

@@ -8,6 +8,9 @@ return {
 		-- display image in neovim
 		"3rd/image.nvim",
 	},
+	cond = function()
+		return not vim.g.vscode
+	end,
 	lazy = true,
 	config = function()
 		require("neo-tree").setup({

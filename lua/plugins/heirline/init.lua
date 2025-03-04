@@ -1,5 +1,8 @@
 return {
 	"rebelot/heirline.nvim",
+	cond = function()
+		return not vim.g.vscode
+	end,
 	-- You can optionally lazy-load heirline on UiEnter
 	-- to make sure all required plugins and colorschemes are loaded before setup
 	-- event = "UiEnter",

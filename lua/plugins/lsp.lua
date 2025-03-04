@@ -1,4 +1,7 @@
 return {
+	cond = function()
+		return not vim.g.vscode
+	end,
 	{
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v3.x",

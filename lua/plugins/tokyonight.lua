@@ -1,5 +1,8 @@
 return {
 	"folke/tokyonight.nvim",
+	cond = function()
+		return not vim.g.vscode
+	end,
 	lazy = false,
 	priority = 1000,
 	config = function()

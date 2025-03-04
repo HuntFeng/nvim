@@ -10,6 +10,9 @@ return {
 			dependencies = { "rafamadriz/friendly-snippets" },
 		},
 	},
+	cond = function()
+		return not vim.g.vscode
+	end,
 	event = "InsertEnter",
 	config = function()
 		-- define keymaps for autocomplete

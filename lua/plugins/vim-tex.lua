@@ -1,6 +1,9 @@
 -- need to do pip3 install neovim-remote in order to use nvr
 return {
 	"lervag/vimtex",
+	cond = function()
+		return not vim.g.vscode
+	end,
 	init = function()
 		vim.g.vimtex_compiler_method = "tectonic"
 		vim.g.vimtex_compiler_tectonic = {

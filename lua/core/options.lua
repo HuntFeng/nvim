@@ -14,3 +14,6 @@ opt.showtabline = 2 -- show tab line
 opt.laststatus = 3 -- show global status line only
 -- opt.laststatus = 0 -- hide status line
 opt.cmdheight = 0 -- hide cmdline
+if vim.g.vscode then
+	opt.cmdheight = 1
+end
