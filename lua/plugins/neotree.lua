@@ -5,8 +5,6 @@ return {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
 		"nvim-tree/nvim-web-devicons",
-		-- display image in neovim
-		"3rd/image.nvim",
 	},
 	lazy = true,
 	config = function()
