@@ -10,7 +10,11 @@ local SearchCount = {
 	end,
 	provider = function(self)
 		local search = self.search
-		return string.format("[%d/%d]", search.current, math.min(search.total, search.maxcount))
+		if not search then
+			return ""
+		else
+			return string.format("[%d/%d]", search.current, math.min(search.total, search.maxcount))
+		end
 	end,
 }
 return SearchCount
