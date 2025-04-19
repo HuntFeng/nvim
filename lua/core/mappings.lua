@@ -48,8 +48,6 @@ map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffers" })
-map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "<leader>c", "<cmd>confirm bd<cr>", { desc = "Close Buffer" })
 
 -- windows
