@@ -1,169 +1,132 @@
 return {
 	{
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v3.x",
+		"neovim/nvim-lspconfig",
 		dependencies = {
-			"neovim/nvim-lspconfig",
-		},
-		lazy = true,
-		-- event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			-- Disable automatic setup, we are doing it manually
-			vim.g.lsp_zero_extend_cmp = 0
-			vim.g.lsp_zero_extend_lspconfig = 0
-			require("lsp-zero").set_sign_icons({
-				error = "",
-				warn = "",
-				info = "",
-				hint = "",
-			})
-		end,
-	},
-	{
-		-- mason for handling the language servers
-		"jay-babu/mason-null-ls.nvim",
-		dependencies = {
-			"williamboman/mason.nvim",
-			"nvimtools/none-ls.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			{ "williamboman/mason.nvim", config = true },
+			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			-- lsp zero
-			local lsp_zero = require("lsp-zero")
-			lsp_zero.extend_lspconfig() -- must call this before the language server is manged by mason rather than manual config
-			lsp_zero.on_attach(function(client, bufnr)
-				lsp_zero.default_keymaps({
-					buffer = bufnr,
-					exclude = { "gs" }, -- reserve this for mini.surround
-					vim.keymap.set("n", "gS", function()
-						vim.lsp.buf.signature_help()
-					end, { desc = "Show function signature help" }),
-				})
-			end)
-			lsp_zero.format_on_save({
-				servers = {
-					["null-ls"] = {
-						"html",
-						"css",
-						"javascript",
-						"less",
-						"json",
-						"vue",
-						"javascriptreact",
-						"typescriptreact",
-						"jsonc",
-						"yaml",
-						"markdown.mdx",
-						"graphql",
-						"handlebars",
-						"svelte",
-						"astro",
-						"markdown",
-						"typescript",
-						"scss",
-						"lua",
-						"luau",
-						"c",
-						"cs",
-						"java",
-						"cuda",
-						"proto",
-						"cpp",
-						"python",
-						"gdscript",
-						"typst",
-					},
-					["texlab"] = { "tex" },
-				},
-			})
-
-			-- use mason to manage language servers
 			require("mason").setup({
 				ui = {
-					border = "rounded",
+					border = "single",
 				},
 			})
 
-			-- setup prettierd formatter and eslint_d linter
-			require("mason-null-ls").setup({
-				handlers = {},
-			})
-
-			-- setup language servers
 			require("mason-lspconfig").setup({
-				ensure_installed = {},
-				handlers = {
-					function(server_name)
-						local lspconfig = require("lspconfig")
-						-- use volar only for vue file
-						local opts = {}
-						if server_name == "tsserver" then
-							local mason_registry = require("mason-registry")
-							local vue_language_server_path =
-								mason_registry.get_package("vue-language-server"):get_install_path()
-							opts = {
-								init_options = {
-									plugins = {
-										{
-											name = "@vue/typescript-plugin",
-											location = vue_language_server_path,
-											languages = { "vue" },
-										},
-									},
-								},
-							}
-						elseif server_name == "volar" then
-							opts = {
-								init_options = {
-									vue = {
-										hybridMode = false,
-									},
-								},
-							}
-						elseif server_name == "clangd" then
-							-- do this otherwise neovim warns about the multiple offset-encoding is not supported
-							opts = {
-								cmd = {
-									"clangd",
-									"--offset-encoding=utf-16",
-								},
-							}
-						elseif server_name == "tinymist" then
-							opts = {
-								single_file_support = true,
-								root_dir = function()
-									return vim.fn.getcwd()
-								end,
-								settings = {
-									exportPdf = "onType",
-									outputPath = "$root/$dir/$name",
-								},
-							}
-						elseif server_name == "pylsp" then
-							opts = {
-								settings = {
-									pylsp = {
-										plugins = {
-											pycodestyle = {
-												ignore = { "E501" }, -- This is the Error code for line too long.
-												maxLineLength = 200, -- This sets how long the line is allowed to be. Also has effect on formatter.
-											},
-										},
-									},
-								},
-							}
-						end
-						lspconfig[server_name].setup(opts)
-					end,
+				ensure_installed = {
+					-- lsps
+					"lua_ls",
+					"pyright",
+					"ts_ls",
+					"volar",
+					"rust_analyzer",
+					"clangd",
+					"cmake",
+					"tinymist",
+					"marksman",
 				},
 			})
 
-			-- null-ls for formatting
-			local null_ls = require("null-ls")
-			null_ls.setup({
-				sources = {
-					null_ls.builtins.formatting.gdformat,
+			local lspconfig = require("lspconfig")
+
+			local servers = {
+				lua_ls = {
+					settings = {
+						Lua = {
+							diagnostics = {
+								globals = { "vim" },
+							},
+							workspace = {
+								checkThirdParty = false,
+								library = vim.api.nvim_get_runtime_file("", true),
+							},
+							telemetry = { enable = false },
+							runtime = { version = "LuaJIT" },
+						},
+					},
+				},
+				pyright = {},
+				ts_ls = {},
+				volar = {},
+				rust_analyzer = {},
+				clangd = {},
+				tinymist = {},
+				marksman = {},
+			}
+
+			for name, config in pairs(servers) do
+				lspconfig[name].setup(config)
+			end
+
+			-- Keymaps
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP Hover" })
+			vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "LSP Signature Help" })
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Go to Defininition" })
+			vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action" })
+			vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+			vim.keymap.set("n", "<leader>lf", function()
+				require("conform").format({ async = true, lsp_fallback = true })
+			end, { desc = "Format code" })
+
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+			vim.lsp.handlers["textDocument/signatureHelp"] =
+				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+		end,
+	},
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		opts = {
+			ensure_installed = {
+				-- Formatters:
+				"stylua",
+				"black",
+				"isort",
+				"prettierd",
+				"clang-format",
+				"cmakelang",
+				"typstfmt",
+				"mdformat",
+				"shfmt",
+				"taplo",
+			},
+			auto_update = true,
+			run_on_start = true,
+		},
+	},
+	{
+		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("conform").setup({
+				format_on_save = {
+					timeout_ms = 1000,
+					lsp_fallback = true,
+				},
+				formatters_by_ft = {
+					lua = { "stylua" },
+					python = { "black", "isort" },
+					rust = { "rustfmt" },
+					javascript = { { "prettierd", "prettier" } },
+					typescript = { { "prettierd", "prettier" } },
+					javascriptreact = { { "prettierd", "prettier" } },
+					typescriptreact = { { "prettierd", "prettier" } },
+					vue = { { "prettierd", "prettier" } },
+					css = { { "prettierd", "prettier" } },
+					html = { { "prettierd", "prettier" } },
+					json = { { "prettierd", "prettier" } },
+					yaml = { { "prettierd", "prettier" } },
+					markdown = { { "prettierd", "prettier" }, "mdformat" },
+					cpp = { "clang_format" },
+					c = { "clang_format" },
+					typst = { "typstfmt" },
+					toml = { "taplo" },
+				},
+				formatters = {
+					isort = {
+						prepend_args = { "--profile", "black" },
+					},
 				},
 			})
 		end,
