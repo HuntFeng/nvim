@@ -13,7 +13,7 @@ return {
 					insert = "",
 				},
 				complete = {
-					insert = "",
+					insert = "<C-CR>",
 				},
 				show_diff = {
 					full_diff = true,
