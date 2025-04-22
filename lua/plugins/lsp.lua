@@ -61,23 +61,20 @@ return {
 
 			-- Keymaps
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP Hover" })
-			vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "LSP Signature Help" })
-			vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show Diagnostics" })
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Go to Defininition" })
+			vim.keymap.set("n", "gs", function()
+				vim.lsp.buf.signature_help({ border = "single" })
+			end, { desc = "LSP Signature Help" })
+			vim.keymap.set("n", "gl", function()
+				vim.diagnostic.open_float({ border = "single" })
+			end, { desc = "Show Diagnostics" })
+			vim.keymap.set("n", "K", function()
+				vim.lsp.buf.hover({ border = "single" })
+			end, { desc = "Go to Defininition" })
 			vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action" })
 			vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 			vim.keymap.set("n", "<leader>lf", function()
 				require("conform").format({ async = true, lsp_fallback = true })
 			end, { desc = "Format code" })
-
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-			vim.lsp.handlers["textDocument/signatureHelp"] =
-				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
-			vim.diagnostic.config({
-				float = {
-					border = "single",
-				},
-			})
 		end,
 	},
 	{
