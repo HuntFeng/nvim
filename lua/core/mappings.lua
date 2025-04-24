@@ -6,7 +6,8 @@ local map = vim.keymap.set
 map("i", "jk", "<esc>l", { silent = true })
 map("i", "jj", "<esc>l", { silent = true })
 map("t", "<esc>", [[<C-\><C-n>]])
-map("t", "jk", [[<C-\><C-n>]])
+-- don't use this, the terminal typing experience is not good
+-- map("t", "jk", [[<C-\><C-n>]])
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
