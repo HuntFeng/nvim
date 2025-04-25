@@ -16,6 +16,12 @@ return {
 				enabled = false,
 			},
 		},
+		keys = {
+			{ "<leader>Fd", "<cmd>FlutterDebug<cr>", desc = "FlutterDebug" },
+			{ "<leader>Fe", "<cmd>FlutterEmulators<cr>", desc = "FlutterEmulators" },
+			{ "<leader>Fr", "<cmd>FlutterRestart<cr>", desc = "FlutterRestart" },
+			{ "<leader>Fq", "<cmd>FlutterQuit<cr>", desc = "FlutterQuit" },
+		},
 	},
 	{
 		"nvim-neotest/neotest",
