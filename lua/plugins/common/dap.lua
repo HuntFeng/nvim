@@ -64,6 +64,28 @@ return {
 			vim.keymap.set("n", "<leader>dc", function()
 				dap.continue()
 			end, { desc = "Dap Continue" })
+
+			dap.adapters.gdb = {
+				id = "gdb",
+				type = "executable",
+				command = "gdb",
+				args = { "--quiet", "--interpreter=dap" },
+			}
+
+			dap.configurations.c = {
+				{
+					name = "Launch",
+					type = "gdb",
+					request = "launch",
+					program = function()
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+					end,
+					cwd = "${workspaceFolder}",
+					stopAtBeginningOfMainSubprogram = false,
+				},
+			}
+
+			dap.configurations.cpp = dap.configurations.c
 		end,
 	},
 	{
