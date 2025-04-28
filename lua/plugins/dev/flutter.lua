@@ -47,7 +47,7 @@ return {
 			end, { desc = "Run tests in current file" })
 			vim.keymap.set("n", "<leader>td", function()
 				neotest.run.run({ strategy = "dap" })
-			end, { desc = "Run tests in current file" })
+			end, { desc = "Run nearest test with dap" })
 			vim.keymap.set("n", "<leader>ts", ":Neotest summary<CR>", { desc = "Test Summary" })
 		end,
 	},
