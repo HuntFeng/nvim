@@ -15,3 +15,4 @@ opt.laststatus = 3 -- show global status line only
 -- opt.laststatus = 0 -- hide status line
 opt.cmdheight = 0 -- hide cmdline
 opt.exrc = true -- enable exrc
+opt.splitright = true
