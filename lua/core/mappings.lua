@@ -49,7 +49,23 @@ map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "<leader>c", "<cmd>confirm bd<cr>", { desc = "Close Buffer" })
+map("n", "<leader>c", function()
+	-- Close current buffer (and switch to alternate if there is any)
+	-- but keep the current window open
+	local curr_buf = vim.api.nvim_get_current_buf()
+	local alt_buf = vim.fn.bufnr("#")
+	local active_bufs = vim.fn.getbufinfo({ buflisted = 1 })
+	for _, buf in ipairs(active_bufs) do
+		if buf.bufnr == alt_buf then
+			vim.cmd("buffer " .. alt_buf)
+			vim.cmd("bdelete " .. curr_buf)
+			return
+		end
+	end
+	-- Open empty buffer if no alternate
+	vim.cmd("enew")
+	vim.cmd("bdelete " .. curr_buf)
+end, { noremap = true, desc = "Close Buffer" })
 
 -- windows
 map("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Delete Window", remap = true })

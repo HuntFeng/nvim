@@ -4,27 +4,29 @@ return {
 		dependencies = {
 			"rcarriga/nvim-dap-ui",
 			"nvim-neotest/nvim-nio",
+			"theHamsta/nvim-dap-virtual-text",
 		},
 		event = "VeryLazy",
 		config = function()
+			require("nvim-dap-virtual-text").setup()
 			local dap, dapui = require("dap"), require("dapui")
+			vim.cmd("hi DapBreakpointColor guifg=#fa4848")
+			vim.fn.sign_define(
+				"DapBreakpoint",
+				{ text = "", texthl = "DapBreakpointColor", linehl = "", numhl = "" }
+			)
+
+			vim.cmd("hi DapStopped guifg=#fa4848")
+			vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "Visual", numhl = "" })
 			dapui.setup({
 				layouts = {
 					{
 						elements = {
-							{ id = "scopes", size = 0.25 },
-							{ id = "breakpoints", size = 0.25 },
-							{ id = "stacks", size = 0.25 },
-							{ id = "watches", size = 0.25 },
+							{ id = "stacks", size = 0.3 },
+							{ id = "watches", size = 0.3 },
+							{ id = "repl", size = 0.4 },
 						},
-						size = 40,
-						position = "left",
-					},
-					{
-						elements = {
-							{ id = "repl", size = 1 },
-						},
-						size = 10,
+						size = 12,
 						position = "bottom",
 					},
 				},
@@ -45,7 +47,7 @@ return {
 			vim.keymap.set("n", "<leader>dt", function()
 				dapui.toggle()
 			end, { desc = "Toggle DAP UI" })
-			vim.keymap.set("n", "<leader>de", function()
+			vim.keymap.set("n", "E", function()
 				dapui.eval()
 			end, { desc = "DAP Eval" })
 
@@ -61,9 +63,15 @@ return {
 			vim.keymap.set("n", "<leader>do", function()
 				dap.step_out()
 			end, { desc = "Dap Step Out" })
+			vim.keymap.set("n", "<leader>dn", function()
+				dap.step_over()
+			end, { desc = "Dap Step Over" })
 			vim.keymap.set("n", "<leader>dc", function()
 				dap.continue()
 			end, { desc = "Dap Continue" })
+			vim.keymap.set("n", "<leader>ds", function()
+				dap.stop()
+			end, { desc = "Dap Stop" })
 
 			dap.adapters.gdb = {
 				id = "gdb",
