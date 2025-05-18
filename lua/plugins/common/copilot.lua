@@ -1,24 +1,22 @@
 return {
-	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		dependencies = {
-			{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-		},
-		build = "make tiktoken", -- Only on MacOS or Linux
-		opts = {
-			mappings = {
-				reset = {
-					normal = "",
-					insert = "",
-				},
-				complete = {
-					insert = "<C-CR>",
-				},
-				show_diff = {
-					full_diff = true,
-				},
-			},
-		},
+	"olimorris/codecompanion.nvim",
+	opts = {},
+	dependencies = {
+		"github/copilot.vim",
 	},
+	config = function()
+		require("codecompanion").setup({
+			adapters = {
+				copilot = function()
+					return require("codecompanion.adapters").extend("copilot", {
+						schema = {
+							model = {
+								default = "claude-3.7-sonnet",
+							},
+						},
+					})
+				end,
+			},
+		})
+	end,
 }
