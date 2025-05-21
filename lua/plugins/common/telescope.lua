@@ -1,6 +1,5 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	tag = "0.1.6",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -13,7 +12,7 @@ return {
 
 		telescope.setup({
 			defaults = {
-				path_display = { "smart" },
+				path_display = { "filename_first" },
 				mappings = {
 					i = {
 						["<C-k>"] = actions.move_selection_previous,
@@ -21,10 +20,10 @@ return {
 					},
 				},
 				borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+				layout_strategy = "vertical",
 				layout_config = {
-					horizontal = {
+					vertical = {
 						preview_cutoff = 0, -- don't cutoff previewer for smaller terminal
-						preview_width = 0.6,
 					},
 				},
 			},
