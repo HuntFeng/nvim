@@ -25,7 +25,7 @@ return {
 				SearchCount,
 				Ruler,
 			},
-			tabline = { BufferLine },
+			-- tabline = { BufferLine },
 		})
 	end,
 }

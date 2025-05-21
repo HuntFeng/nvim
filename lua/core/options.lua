@@ -13,6 +13,7 @@ opt.signcolumn = "yes" -- always show signcolumn for lsp diags
 opt.showtabline = 2 -- show tab line
 opt.laststatus = 3 -- show global status line only
 -- opt.laststatus = 0 -- hide status line
+opt.showtabline = 0 -- hide tab line
 opt.cmdheight = 0 -- hide cmdline
 opt.exrc = true -- enable exrc
 opt.splitright = true
