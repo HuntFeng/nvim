@@ -1,9 +1,12 @@
 return {
 	"olimorris/codecompanion.nvim",
-	opts = {},
 	dependencies = {
 		"github/copilot.vim",
+		"j-hui/fidget.nvim",
 	},
+	init = function()
+		require("plugins.common.codecompanion.fidget-spinner"):init()
+	end,
 	config = function()
 		require("codecompanion").setup({
 			adapters = {
