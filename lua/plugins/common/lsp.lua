@@ -19,7 +19,7 @@ return {
 					"lua_ls",
 					"pyright",
 					"ts_ls",
-					"volar",
+					"vue_ls",
 					"rust_analyzer",
 					"clangd",
 					"cmake",
@@ -27,8 +27,6 @@ return {
 					"marksman",
 				},
 			})
-
-			local lspconfig = require("lspconfig")
 
 			local servers = {
 				lua_ls = {
@@ -48,7 +46,7 @@ return {
 				},
 				pyright = {},
 				ts_ls = {},
-				volar = {},
+				vue_ls = {},
 				rust_analyzer = {},
 				clangd = {},
 				tinymist = {},
@@ -56,7 +54,7 @@ return {
 			}
 
 			for name, config in pairs(servers) do
-				lspconfig[name].setup(config)
+				vim.lsp.config(name, config)
 			end
 
 			-- Keymaps
