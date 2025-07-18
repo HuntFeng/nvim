@@ -16,7 +16,7 @@ return {
 		},
 		hints = {
 			-- Charaters to use for hints (NOTE: make sure they don't collide with the navigation keymaps)
-			dictionary = "qwertyuiop",
+			dictionary = "123456789",
 		},
 	},
 }
