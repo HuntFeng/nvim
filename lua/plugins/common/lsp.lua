@@ -58,7 +58,7 @@ return {
 			end
 
 			-- Keymaps
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP Hover" })
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
 			vim.keymap.set("n", "gs", function()
 				vim.lsp.buf.signature_help({ border = "single" })
 			end, { desc = "LSP Signature Help" })
@@ -67,7 +67,7 @@ return {
 			end, { desc = "Show Diagnostics" })
 			vim.keymap.set("n", "K", function()
 				vim.lsp.buf.hover({ border = "single" })
-			end, { desc = "Go to Defininition" })
+			end, { desc = "LSP Hover" })
 			vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action" })
 			vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 			vim.keymap.set("n", "<leader>lf", function()
