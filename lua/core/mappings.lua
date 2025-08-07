@@ -5,7 +5,7 @@ local map = vim.keymap.set
 -- better escape
 map("i", "jk", "<esc>l", { silent = true })
 map("i", "jj", "<esc>l", { silent = true })
-map("t", "<esc>", [[<C-\><C-n>]])
+-- map("t", "<esc>", [[<C-\><C-n>]])
 -- don't use this, the terminal typing experience is not good
 -- map("t", "jk", [[<C-\><C-n>]])
 
@@ -55,16 +55,21 @@ map("n", "<leader>c", function()
 	local curr_buf = vim.api.nvim_get_current_buf()
 	local alt_buf = vim.fn.bufnr("#")
 	local active_bufs = vim.fn.getbufinfo({ buflisted = 1 })
-	for _, buf in ipairs(active_bufs) do
-		if buf.bufnr == alt_buf then
-			vim.cmd("buffer " .. alt_buf)
-			vim.cmd("bdelete " .. curr_buf)
-			return
+	local buftype = vim.bo[curr_buf].buftype
+	if buftype == "terminal" then
+		vim.cmd("bdelete! " .. curr_buf)
+	else
+		for _, buf in ipairs(active_bufs) do
+			if buf.bufnr == alt_buf then
+				vim.cmd("buffer " .. alt_buf)
+				vim.cmd("bdelete " .. curr_buf)
+				return
+			end
 		end
+		-- Open empty buffer if no alternate
+		vim.cmd("enew")
+		vim.cmd("bdelete " .. curr_buf)
 	end
-	-- Open empty buffer if no alternate
-	vim.cmd("enew")
-	vim.cmd("bdelete " .. curr_buf)
 end, { noremap = true, desc = "Close Buffer" })
 
 -- windows
@@ -91,3 +96,11 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 -- wrap
 map({ "n", "i", "x", "s" }, "<A-z>", "<cmd>set wrap!<cr>", { desc = "Wrap text" })
+
+-- comment
+map("n", "<leader>/", function()
+	vim.cmd.normal("gcc")
+end, { desc = "Comment", noremap = true })
+map("v", "<leader>/", function()
+	vim.cmd.normal("gc")
+end, { desc = "Comment", noremap = true })
