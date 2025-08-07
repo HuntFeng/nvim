@@ -10,8 +10,8 @@ return {
 	config = function()
 		require("neo-tree").setup({
 			window = {
-				position = "float",
-				-- use popup to set width since it's floating window
+				position = "current",
+				-- use popup to set width for floating window
 				popup = {
 					size = {
 						width = 35,
