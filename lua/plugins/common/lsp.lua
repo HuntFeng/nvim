@@ -87,7 +87,7 @@ return {
 				"prettierd",
 				"clang-format",
 				"cmakelang",
-				"typstfmt",
+				"typstyle",
 				"taplo",
 			},
 			auto_update = true,
@@ -119,7 +119,7 @@ return {
 					markdown = { "prettierd" },
 					cpp = { "clang_format" },
 					c = { "clang_format" },
-					typst = { "typstfmt" },
+					typst = { "typstyle" },
 					toml = { "taplo" },
 				},
 				formatters = {
