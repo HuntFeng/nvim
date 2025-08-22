@@ -39,6 +39,9 @@ function cmp.selection_count()
 	if count > 1 then
 		local index = 1
 		mc.action(function(ctx)
+			if ctx == nil then
+				return ""
+			end
 			local cursors = ctx.getCursors()
 			for i, cursor in ipairs(cursors) do
 				if vim.deep_equal(cursor._pos, ctx.mainCursor()._pos) then
@@ -46,7 +49,7 @@ function cmp.selection_count()
 				end
 			end
 		end)
-		return hi_pattern:format("Visual", string.format(" MC: %d/%d ", index, count))
+		return hi_pattern:format("Visual", string.format(" MC: [%d/%d] ", index, count))
 	else
 		return ""
 	end
