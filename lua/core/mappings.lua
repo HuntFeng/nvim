@@ -54,21 +54,31 @@ map("n", "<leader>c", function()
 	-- but keep the current window open
 	local curr_buf = vim.api.nvim_get_current_buf()
 	local alt_buf = vim.fn.bufnr("#")
-	local active_bufs = vim.fn.getbufinfo({ buflisted = 1 })
+	local active_bufs = vim.tbl_map(function(buf)
+		return buf.bufnr
+	end, vim.fn.getbufinfo({ buflisted = 1 }))
 	local buftype = vim.bo[curr_buf].buftype
 	if buftype == "terminal" then
 		vim.cmd("bdelete! " .. curr_buf)
 	else
-		for _, buf in ipairs(active_bufs) do
-			if buf.bufnr == alt_buf then
-				vim.cmd("buffer " .. alt_buf)
-				vim.cmd("bdelete " .. curr_buf)
-				return
+		if vim.list_contains(active_bufs, alt_buf) then
+			-- if alternate buffer exists, switch to it
+			vim.cmd("buffer " .. alt_buf)
+			vim.cmd("bdelete " .. curr_buf)
+		elseif #active_bufs > 1 then
+			-- else if there are other buffers, switch to the first one
+			for _, buf in ipairs(active_bufs) do
+				if buf ~= curr_buf then
+					vim.cmd("buffer " .. buf)
+					vim.cmd("bdelete " .. curr_buf)
+					return
+				end
 			end
+		else
+			-- if this is the last buffer, just create a new empty buffer
+			vim.cmd("enew")
+			vim.cmd("bdelete " .. curr_buf)
 		end
-		-- Open empty buffer if no alternate
-		vim.cmd("enew")
-		vim.cmd("bdelete " .. curr_buf)
 	end
 end, { noremap = true, desc = "Close Buffer" })
 
