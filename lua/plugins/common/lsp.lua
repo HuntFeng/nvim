@@ -14,18 +14,18 @@ return {
 			})
 
 			require("mason-lspconfig").setup({
-				ensure_installed = {
-					-- lsps
-					"lua_ls",
-					"pyright",
-					"ts_ls",
-					"vue_ls",
-					"rust_analyzer",
-					"clangd",
-					"cmake",
-					"tinymist",
-					"marksman",
-				},
+				-- ensure_installed = {
+				-- 	-- lsps
+				-- 	"lua_ls",
+				-- 	"pyright",
+				-- 	"ts_ls",
+				-- 	"vue_ls",
+				-- 	"rust_analyzer",
+				-- 	"clangd",
+				-- 	"cmake",
+				-- 	"tinymist",
+				-- 	"marksman",
+				-- },
 			})
 
 			local servers = {
@@ -79,17 +79,17 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		dependencies = { "williamboman/mason.nvim" },
 		opts = {
-			ensure_installed = {
-				-- Formatters:
-				"stylua",
-				"black",
-				"isort",
-				"prettierd",
-				"clang-format",
-				"cmakelang",
-				"typstyle",
-				"taplo",
-			},
+			-- ensure_installed = {
+			-- 	-- formatters
+			-- 	"stylua",
+			-- 	"black",
+			-- 	"isort",
+			-- 	"prettierd",
+			-- 	"clang-format",
+			-- 	"cmakelang",
+			-- 	"typstyle",
+			-- 	"taplo",
+			-- },
 			auto_update = true,
 			run_on_start = true,
 		},
