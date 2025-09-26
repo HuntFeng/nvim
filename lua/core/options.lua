@@ -17,3 +17,7 @@ opt.showtabline = 0 -- hide tab line
 opt.cmdheight = 0 -- hide cmdline
 opt.exrc = true -- enable exrc
 opt.splitright = true
+opt.foldmethod = "indent" -- fold by indent
+opt.foldcolumn = "0" -- hide fold column
+opt.foldlevelstart = 99 -- open all folds by default
+opt.foldenable = true -- enable folding
