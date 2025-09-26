@@ -16,6 +16,10 @@ map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, 
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 map("n", "[[", "#")
 map("n", "]]", "*")
+map("v", "K", ":m '<-2<CR>gv-gv", { desc = "Move selection up" })
+map("v", "J", ":m '>+1<CR>gv-gv", { desc = "Move selection down" })
+map("v", "H", "<gv", { desc = "Move selection left" })
+map("v", "L", ">gv", { desc = "Move selection right" })
 
 -- Move to window using the <ctrl>+hjkl keys
 map({ "n", "t" }, "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window", remap = true })
