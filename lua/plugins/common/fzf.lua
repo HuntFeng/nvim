@@ -39,9 +39,6 @@ return {
 						hidden = true,
 					},
 				},
-				actions = {
-					["d"] = { fn = actions.buf_del, reload = true },
-				},
 			},
 			lsp = {
 				formatter = "path.filename_first",
