@@ -106,7 +106,7 @@ map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
 -- save file
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+map({ "x", "n", "s" }, "<leader>w", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 -- wrap
 map({ "n", "i", "x", "s" }, "<A-z>", "<cmd>set wrap!<cr>", { desc = "Wrap text" })

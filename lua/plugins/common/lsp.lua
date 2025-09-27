@@ -68,11 +68,53 @@ return {
 			vim.keymap.set("n", "K", function()
 				vim.lsp.buf.hover({ border = "single" })
 			end, { desc = "LSP Hover" })
-			vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action" })
-			vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "Rename Symbol" })
-			vim.keymap.set("n", "<leader>lf", function()
-				require("conform").format({ async = true, lsp_fallback = true })
-			end, { desc = "Format code" })
+			require("which-key").add({
+				{ "<leader>l", group = "LSP" },
+				{
+					"<leader>lR",
+					function()
+						vim.lsp.buf.rename()
+					end,
+					desc = "LSP Rename",
+				},
+				{
+					"<leader>la",
+					function()
+						vim.lsp.buf.code_action()
+					end,
+					desc = "LSP Action",
+				},
+				{
+					"<leader>lf",
+					function()
+						require("conform").format({ async = true, lsp_fallback = true })
+					end,
+					desc = "Format Code",
+				},
+				{
+					"<leader>li",
+					function()
+						vim.lsp.buf.incoming_calls()
+					end,
+					desc = "LSP Incoming Calls",
+				},
+				{
+					"<leader>lr",
+					function()
+						vim.lsp.buf.references()
+					end,
+					desc = "LSP References",
+				},
+				{ "<leader>lI", "<cmd>LspInfo<cr>", desc = "LSP Info" },
+				{ "<leader>ll", "<cmd>LspLog<cr>", desc = "LSP Log" },
+				{
+					"<leader>lR",
+					function()
+						vim.lsp.buf.rename()
+					end,
+					desc = "Rename Symbol",
+				},
+			})
 		end,
 	},
 	{
