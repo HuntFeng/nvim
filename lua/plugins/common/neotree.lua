@@ -7,6 +7,15 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	lazy = true,
+	keys = {
+		{
+			"<leader>e",
+			function()
+				require("neo-tree.command").execute({ toggle = true, reveal = true })
+			end,
+			desc = "Neotree Toggle",
+		},
+	},
 	config = function()
 		require("neo-tree").setup({
 			window = {
