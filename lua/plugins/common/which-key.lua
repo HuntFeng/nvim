@@ -16,63 +16,6 @@ return {
 				end,
 				desc = "Neotree Toggle",
 			},
-			{ "<leader>f", group = "Fuzzy Find" },
-			{
-				"<leader>fF",
-				function()
-					require("telescope.builtin").find_files({ no_ignore = true })
-				end,
-				desc = "Find All Files",
-			},
-			{
-				"<leader>fb",
-				function()
-					require("telescope.builtin").buffers()
-				end,
-				desc = "Find Buffers",
-			},
-			{
-				"<leader>ff",
-				function()
-					require("telescope.builtin").find_files({ file_ignore_patterns = { "^public/" } })
-				end,
-				desc = "Find Files",
-			},
-			{
-				"<leader>fw",
-				function()
-					require("telescope.builtin").live_grep({ file_ignore_patterns = { "^public/", "%.lock" } })
-				end,
-				desc = "Live Grep",
-			},
-			{
-				"<leader>fs",
-				function()
-					require("telescope.builtin").lsp_document_symbols()
-				end,
-				desc = "LSP Document Symbols",
-			},
-			{
-				"<leader>fS",
-				function()
-					require("telescope.builtin").lsp_workspace_symbols()
-				end,
-				desc = "LSP Workspace Symbols",
-			},
-			{
-				"<leader>fi",
-				function()
-					require("telescope.builtin").lsp_incoming_calls()
-				end,
-				desc = "LSP Incoming Calls",
-			},
-			{
-				"<leader>fr",
-				function()
-					require("telescope.builtin").lsp_references()
-				end,
-				desc = "LSP References",
-			},
 			{ "<leader>l", group = "LSP" },
 			{
 				"<leader>lR",
@@ -87,13 +30,6 @@ return {
 					vim.lsp.buf.code_action()
 				end,
 				desc = "LSP Action",
-			},
-			{
-				"<leader>ld",
-				function()
-					require("telescope.builtin").diagnostics()
-				end,
-				desc = "Diagnostics",
 			},
 			{
 				"<leader>lf",
