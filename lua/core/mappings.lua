@@ -5,9 +5,6 @@ local map = vim.keymap.set
 -- better escape
 map("i", "jk", "<esc>l", { silent = true })
 map("i", "jj", "<esc>l", { silent = true })
--- map("t", "<esc>", [[<C-\><C-n>]])
--- don't use this, the terminal typing experience is not good
--- map("t", "jk", [[<C-\><C-n>]])
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -22,10 +19,10 @@ map("v", "H", "<gv", { desc = "Move selection left" })
 map("v", "L", ">gv", { desc = "Move selection right" })
 
 -- Move to window using the <ctrl>+hjkl keys
-map({ "n", "t" }, "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window", remap = true })
-map({ "n", "t" }, "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window", remap = true })
-map({ "n", "t" }, "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window", remap = true })
-map({ "n", "t" }, "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window", remap = true })
+-- map({ "n", "t" }, "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window", remap = true })
+-- map({ "n", "t" }, "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window", remap = true })
+-- map({ "n", "t" }, "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window", remap = true })
+-- map({ "n", "t" }, "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window", remap = true })
 
 -- move cursor in insert mode using <ctrl>+hjkl
 map("i", "<C-h>", "<Left>", { desc = "Move Cursor Left", remap = true })
@@ -67,14 +64,22 @@ map("n", "<leader>c", function()
 	else
 		if vim.list_contains(active_bufs, alt_buf) then
 			-- if alternate buffer exists, switch to it
+			if vim.bo[curr_buf].modified then
+				vim.cmd("confirm bdelete " .. curr_buf)
+			else
+				vim.cmd("bdelete " .. curr_buf)
+			end
 			vim.cmd("buffer " .. alt_buf)
-			vim.cmd("bdelete " .. curr_buf)
 		elseif #active_bufs > 1 then
 			-- else if there are other buffers, switch to the first one
 			for _, buf in ipairs(active_bufs) do
 				if buf ~= curr_buf then
+					if vim.bo[curr_buf].modified then
+						vim.cmd("confirm bdelete " .. curr_buf)
+					else
+						vim.cmd("bdelete " .. curr_buf)
+					end
 					vim.cmd("buffer " .. buf)
-					vim.cmd("bdelete " .. curr_buf)
 					return
 				end
 			end
