@@ -19,10 +19,10 @@ map("v", "H", "<gv", { desc = "Move selection left" })
 map("v", "L", ">gv", { desc = "Move selection right" })
 
 -- Move to window using the <ctrl>+hjkl keys
--- map({ "n", "t" }, "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window", remap = true })
--- map({ "n", "t" }, "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window", remap = true })
--- map({ "n", "t" }, "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window", remap = true })
--- map({ "n", "t" }, "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window", remap = true })
+map({ "n", "t" }, "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window", remap = true })
+map({ "n", "t" }, "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window", remap = true })
+map({ "n", "t" }, "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window", remap = true })
+map({ "n", "t" }, "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window", remap = true })
 
 -- move cursor in insert mode using <ctrl>+hjkl
 map("i", "<C-h>", "<Left>", { desc = "Move Cursor Left", remap = true })
