@@ -5,7 +5,6 @@ return {
 			{ "williamboman/mason.nvim", config = true },
 			{ "williamboman/mason-lspconfig.nvim" },
 		},
-		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("mason").setup({
 				ui = {
