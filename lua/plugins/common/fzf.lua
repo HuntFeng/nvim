@@ -1,9 +1,8 @@
 return {
 	"ibhagwan/fzf-lua",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	lazy = true,
+	event = "VeryLazy",
 	config = function()
-		local actions = require("fzf-lua").actions
 		require("fzf-lua").setup({
 			grep = {
 				formatter = "path.filename_first",
