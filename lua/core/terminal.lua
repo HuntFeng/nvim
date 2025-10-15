@@ -46,4 +46,9 @@ vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]])
 vim.keymap.set({ "n", "t" }, "<C-/>", toggle_terminal, { desc = "Toggle terminal" })
 vim.keymap.set({ "n", "t" }, "<C-_>", toggle_terminal, { desc = "Toggle terminal" })
 vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
-vim.keymap.set("n", "q", "<cmd>bd!<cr>")
+vim.keymap.set("n", "q", function()
+	local curr_buf = vim.api.nvim_get_current_buf()
+	if vim.bo[curr_buf].buftype == "terminal" then
+		vim.api.nvim_win_close(0, true)
+	end
+end)
