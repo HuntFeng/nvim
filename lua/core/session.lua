@@ -78,19 +78,19 @@ function M.setup()
 	vim.api.nvim_create_autocmd("VimEnter", {
 		group = augroup,
 		callback = function()
+			-- save / load session only when user open nvim using "nvim"
+			-- don't do session when users do "nvim xxx"
 			if vim.fn.argc() == 0 then
-				M.load_session()
+				if vim.v.this_session == "" then
+					M.load_session()
+					-- create session if nothing loaded
+					if vim.v.this_session == "" then
+						M.save_session()
+					end
+				end
 			end
 		end,
 	})
-
-	if vim.v.this_session == "" then
-		-- load or create session on startup
-		M.load_session()
-		if vim.v.this_session == "" then
-			M.save_session()
-		end
-	end
 end
 
 M.setup()
