@@ -62,6 +62,6 @@ return {
 			{ "<leader>fs", "<cmd>FzfLua lsp_workspace_symbols<cr>", desc = "LSP Workspace Symbols" },
 			{ "<leader>fd", "<cmd>FzfLua lsp_workspace_diagnostics<cr>", desc = "LSP Diagnostics" },
 		})
-		vim.keymap.set("n", "<Tab>", "<cmd>FzfLua buffers<cr>", { desc = "Buffers" })
+		-- vim.keymap.set("n", "<Tab>", "<cmd>FzfLua buffers<cr>", { desc = "Buffers" })
 	end,
 }
