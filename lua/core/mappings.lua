@@ -135,3 +135,6 @@ end, { desc = "Comment", noremap = true })
 map("v", "<leader>/", function()
 	vim.cmd.normal("gc")
 end, { desc = "Comment", noremap = true })
+
+-- grep
+map("n", "<leader>g", ":copen | :silent :grep ")
