@@ -57,6 +57,7 @@ map("n", "<cr>", function()
 end, { desc = "New line" })
 
 -- buffers
+map("n", "<tab>", ":b ", { desc = "Prev Buffer" })
 map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
