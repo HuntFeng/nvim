@@ -23,3 +23,4 @@ opt.foldlevelstart = 99 -- open all folds by default
 opt.foldenable = true -- enable folding
 opt.winborder = "single" -- border for floating windows
 opt.grepprg = "rg --vimgrep --no-heading --smart-case --glob '!.git/*' --glob '!node_modules/*' --glob '!venv/*'"
+vim.cmd([[set path+=**]]) -- able to search subdirs

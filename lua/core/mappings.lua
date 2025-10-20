@@ -57,7 +57,7 @@ map("n", "<cr>", function()
 end, { desc = "New line" })
 
 -- buffers
-map("n", "<tab>", ":b ", { desc = "Prev Buffer" })
+map("n", "<tab>", ":buffer ", { desc = "Choose Buffer" })
 map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
@@ -136,5 +136,7 @@ map("v", "<leader>/", function()
 	vim.cmd.normal("gc")
 end, { desc = "Comment", noremap = true })
 
--- grep
-map("n", "<leader>g", ":copen | :silent :grep ")
+-- fuzzy find (need to have blink)
+map("n", "<leader>fb", ":buffer ")
+map("n", "<leader>ff", ":find ")
+map("n", "<leader>fg", ":copen | :silent :grep ")
