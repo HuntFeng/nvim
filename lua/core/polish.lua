@@ -17,13 +17,16 @@ vim.api.nvim_create_autocmd("FileType", {
 			callback = function()
 				local idx = vim.fn.line(".")
 				local qf_entry = vim.fn.getqflist({ idx = idx, items = 1 }).items[1]
+				if qf_entry == nil then
+					return
+				end
 				if not vim.api.nvim_win_is_valid(qf_preview_win_id) then
 					qf_preview_win_id = vim.api.nvim_open_win(qf_entry.bufnr, false, {
 						relative = "win",
 						win = 0,
 						anchor = "SW",
 						width = vim.api.nvim_win_get_width(0),
-						height = vim.api.nvim_win_get_height(0) * 0.8,
+						height = math.min(math.ceil(vim.api.nvim_win_get_height(0) * 0.8), 10),
 						col = 0,
 						row = 0,
 					})
@@ -41,9 +44,10 @@ vim.api.nvim_create_autocmd("FileType", {
 			buffer = 0,
 			callback = function()
 				if qf_preview_win_id > -1 then
-					local idx = vim.fn.line(".")
-					local qf_entry = vim.fn.getqflist({ idx = idx, items = 1 }).items[1]
-					vim.api.nvim_buf_clear_namespace(qf_entry.bufnr, ns_id, 0, -1)
+					local qflist_items = vim.fn.getqflist()
+					for _, qf_entry in ipairs(qflist_items) do
+						vim.api.nvim_buf_clear_namespace(qf_entry.bufnr, ns_id, 0, -1)
+					end
 					vim.api.nvim_win_close(qf_preview_win_id, true)
 					qf_preview_win_id = -1
 				end
