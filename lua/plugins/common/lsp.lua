@@ -1,32 +1,8 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = {
-			{ "williamboman/mason.nvim", config = true },
-			{ "williamboman/mason-lspconfig.nvim" },
-		},
+		event = "VeryLazy",
 		config = function()
-			require("mason").setup({
-				ui = {
-					border = "single",
-				},
-			})
-
-			require("mason-lspconfig").setup({
-				-- ensure_installed = {
-				-- 	-- lsps
-				-- 	"lua_ls",
-				-- 	"pyright",
-				-- 	"ts_ls",
-				-- 	"vue_ls",
-				-- 	"rust_analyzer",
-				-- 	"clangd",
-				-- 	"cmake",
-				-- 	"tinymist",
-				-- 	"marksman",
-				-- },
-			})
-
 			local servers = {
 				lua_ls = {
 					settings = {
@@ -53,91 +29,42 @@ return {
 			}
 
 			for name, config in pairs(servers) do
+				-- vim.lsp.config finds configs in nvim-lspconfig and merge them with our custom config
+				-- this includes filetypes so we don't need to worry about all lsp being enabled
 				vim.lsp.config(name, config)
+				vim.lsp.enable(name)
 			end
 
 			-- Keymaps
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
-			vim.keymap.set("n", "gs", function()
-				vim.lsp.buf.signature_help({ border = "single" })
-			end, { desc = "LSP Signature Help" })
+			-- K hover document
+			-- gd go to definition
+			-- gD go to declaration
+			-- grr go to reference
+			-- gri go to implementation
+			-- gra code action
+			-- grn symbol rename
+			-- gO symbol list
+			-- ctrl-s in insert mode to trigger signature help
 			vim.keymap.set("n", "gl", function()
-				vim.diagnostic.open_float({ border = "single" })
+				vim.diagnostic.open_float()
 			end, { desc = "Show Diagnostics" })
-			vim.keymap.set("n", "K", function()
-				vim.lsp.buf.hover({ border = "single" })
-			end, { desc = "LSP Hover" })
-			require("which-key").add({
-				{ "<leader>l", group = "LSP" },
-				{
-					"<leader>lR",
-					function()
-						vim.lsp.buf.rename()
-					end,
-					desc = "LSP Rename",
-				},
-				{
-					"<leader>la",
-					function()
-						vim.lsp.buf.code_action()
-					end,
-					desc = "LSP Action",
-				},
-				{
-					"<leader>lf",
-					function()
-						require("conform").format({ async = true, lsp_fallback = true })
-					end,
-					desc = "Format Code",
-				},
-				{
-					"<leader>li",
-					function()
-						vim.lsp.buf.incoming_calls()
-					end,
-					desc = "LSP Incoming Calls",
-				},
-				{
-					"<leader>lr",
-					function()
-						vim.lsp.buf.references()
-					end,
-					desc = "LSP References",
-				},
-				{ "<leader>lI", "<cmd>LspInfo<cr>", desc = "LSP Info" },
-				{ "<leader>ll", "<cmd>LspLog<cr>", desc = "LSP Log" },
-				{
-					"<leader>lR",
-					function()
-						vim.lsp.buf.rename()
-					end,
-					desc = "Rename Symbol",
-				},
-			})
+			vim.keymap.set("n", "gI", function()
+				vim.lsp.buf.incoming_calls()
+			end, { desc = "Show Incoming Calls" })
 		end,
 	},
+	-- mason and mason-tool-installer for easier installation of lsp servers and formatters
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		dependencies = { "williamboman/mason.nvim" },
+		dependencies = { "williamboman/mason.nvim", config = true },
 		opts = {
-			-- ensure_installed = {
-			-- 	-- formatters
-			-- 	"stylua",
-			-- 	"black",
-			-- 	"isort",
-			-- 	"prettierd",
-			-- 	"clang-format",
-			-- 	"cmakelang",
-			-- 	"typstyle",
-			-- 	"taplo",
-			-- },
 			auto_update = true,
 			run_on_start = true,
 		},
 	},
 	{
 		"stevearc/conform.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufWritePre" },
 		config = function()
 			require("conform").setup({
 				format_on_save = {
