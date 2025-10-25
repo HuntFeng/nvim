@@ -20,7 +20,17 @@ return {
 					},
 				},
 				pyright = {},
-				ts_ls = {},
+				ts_ls = {
+					filetypes = {
+						"javascript",
+						"javascriptreact",
+						"javascript.jsx",
+						"typescript",
+						"typescriptreact",
+						"typescript.tsx",
+						"vue",
+					},
+				},
 				vue_ls = {},
 				rust_analyzer = {},
 				clangd = {},
@@ -36,21 +46,17 @@ return {
 			end
 
 			-- Keymaps
-			-- K hover document
-			-- gd go to definition
-			-- gD go to declaration
-			-- grr go to reference
-			-- gri go to implementation
-			-- gra code action
-			-- grn symbol rename
-			-- gO symbol list
-			-- ctrl-s in insert mode to trigger signature help
-			vim.keymap.set("n", "gl", function()
-				vim.diagnostic.open_float()
-			end, { desc = "Show Diagnostics" })
-			vim.keymap.set("n", "gI", function()
-				vim.lsp.buf.incoming_calls()
-			end, { desc = "Show Incoming Calls" })
+			vim.keymap.set("n", "K", vim.lsp.buf.hover)
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+			vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+			vim.keymap.set("n", "grr", vim.lsp.buf.references)
+			vim.keymap.set("n", "gri", vim.lsp.buf.implementation)
+			vim.keymap.set("n", "gra", vim.lsp.buf.code_action)
+			vim.keymap.set("n", "grn", vim.lsp.buf.rename)
+			vim.keymap.set("n", "gO", vim.lsp.buf.outgoing_calls)
+			vim.keymap.set("n", "gI", vim.lsp.buf.incoming_calls)
+			vim.keymap.set("n", "gl", vim.diagnostic.open_float)
+			vim.keymap.set("n", "<C-s>", vim.lsp.buf.signature_help)
 		end,
 	},
 	-- mason and mason-tool-installer for easier installation of lsp servers and formatters
