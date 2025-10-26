@@ -26,7 +26,7 @@ opt.grepprg =
 	"rg --vimgrep --no-heading --smart-case --glob '!.git/*' --glob '!node_modules/*' --glob '!venv/*' --glob '!.*/*'"
 vim.cmd([[set path+=**]]) -- able to search subdirs
 vim.opt.wildignore = vim.opt.wildignore + {
-	"*/node_modules/*",
-	"*/.*/*",
-	"*/build/*",
+	"node_modules/*",
+	".*/*",
+	"build/*",
 }
