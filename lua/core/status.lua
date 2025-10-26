@@ -33,27 +33,27 @@ function cmp.hlcount()
 	return hi_pattern:format("WarningMsg", txt)
 end
 
-function cmp.selection_count()
-	local mc = require("multicursor-nvim")
-	local count = mc.numCursors()
-	if count > 1 then
-		local index = 1
-		mc.action(function(ctx)
-			if ctx == nil then
-				return ""
-			end
-			local cursors = ctx.getCursors()
-			for i, cursor in ipairs(cursors) do
-				if vim.deep_equal(cursor._pos, ctx.mainCursor()._pos) then
-					index = i
-				end
-			end
-		end)
-		return hi_pattern:format("Visual", string.format(" MC: [%d/%d] ", index, count))
-	else
-		return ""
-	end
-end
+-- function cmp.selection_count()
+-- 	local mc = require("multicursor-nvim")
+-- 	local count = mc.numCursors()
+-- 	if count > 1 then
+-- 		local index = 1
+-- 		mc.action(function(ctx)
+-- 			if ctx == nil then
+-- 				return ""
+-- 			end
+-- 			local cursors = ctx.getCursors()
+-- 			for i, cursor in ipairs(cursors) do
+-- 				if vim.deep_equal(cursor._pos, ctx.mainCursor()._pos) then
+-- 					index = i
+-- 				end
+-- 			end
+-- 		end)
+-- 		return hi_pattern:format("Visual", string.format(" MC: [%d/%d] ", index, count))
+-- 	else
+-- 		return ""
+-- 	end
+-- end
 
 local statusline = {
 
@@ -61,7 +61,7 @@ local statusline = {
 	"%f", -- relative file path
 	"%=", -- separator
 	'%{%v:hlsearch ? v:lua._statusline_component("hlcount") : ""%}', -- highlight count
-	'%{%v:lua._statusline_component("selection_count")%}',
+	-- '%{%v:lua._statusline_component("selection_count")%}',
 	'%{%v:lua._statusline_component("position")%}', -- cursor position,
 }
 
