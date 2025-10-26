@@ -29,8 +29,6 @@ return {
 				end
 			end,
 		})
-	end,
-	config = function()
 		vim.opt.spell = true -- enable spelling check
 		vim.opt.spelllang = "en_us"
 	end,
