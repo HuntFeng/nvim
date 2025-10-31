@@ -1,4 +1,4 @@
-local cmp = {} -- statusline components
+local M = {}
 
 --- highlight pattern
 -- This has three parts:
@@ -9,14 +9,10 @@ local cmp = {} -- statusline components
 local hi_pattern = "%%#%s#%s%%*"
 
 function _G._statusline_component(name)
-	return cmp[name]()
+	return M[name]()
 end
 
-function cmp.position()
-	return hi_pattern:format("Search", " %2p%%%3l:%-2c ")
-end
-
-function cmp.git_branch()
+function M.git_branch()
 	local branch = vim.fn.systemlist("git rev-parse --abbrev-ref HEAD")[1]
 	if branch and branch ~= "" and not branch:match("^fatal") then
 		return hi_pattern:format("Identifier", "  " .. branch .. " ")
@@ -24,7 +20,7 @@ function cmp.git_branch()
 	return ""
 end
 
-function cmp.hlcount()
+function M.hlcount()
 	local ok, sc = pcall(vim.fn.searchcount, { maxcount = 9999, timeout = 50 })
 	if not ok or sc.incomplete ~= 0 or sc.total == 0 then
 		return ""
@@ -33,36 +29,13 @@ function cmp.hlcount()
 	return hi_pattern:format("WarningMsg", txt)
 end
 
--- function cmp.selection_count()
--- 	local mc = require("multicursor-nvim")
--- 	local count = mc.numCursors()
--- 	if count > 1 then
--- 		local index = 1
--- 		mc.action(function(ctx)
--- 			if ctx == nil then
--- 				return ""
--- 			end
--- 			local cursors = ctx.getCursors()
--- 			for i, cursor in ipairs(cursors) do
--- 				if vim.deep_equal(cursor._pos, ctx.mainCursor()._pos) then
--- 					index = i
--- 				end
--- 			end
--- 		end)
--- 		return hi_pattern:format("Visual", string.format(" MC: [%d/%d] ", index, count))
--- 	else
--- 		return ""
--- 	end
--- end
-
 local statusline = {
-
 	'%{%v:lua._statusline_component("git_branch")%}', -- git branch
 	"%f", -- relative file path
+	"%m", -- modified flag
 	"%=", -- separator
 	'%{%v:hlsearch ? v:lua._statusline_component("hlcount") : ""%}', -- highlight count
-	-- '%{%v:lua._statusline_component("selection_count")%}',
-	'%{%v:lua._statusline_component("position")%}', -- cursor position,
+	"%l:%c", -- cursor position,
 }
 
 vim.o.statusline = table.concat(statusline, "")
