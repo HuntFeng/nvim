@@ -104,4 +104,14 @@ return {
 			})
 		end,
 	},
+	{
+		"github/copilot.vim",
+		event = "BufWinEnter",
+		init = function()
+			vim.g.copilot_no_tab_map = true
+		end,
+		config = function()
+			vim.api.nvim_set_keymap("i", "<C-y>", "copilot#Accept()", { expr = true, silent = true, noremap = false })
+		end,
+	},
 }

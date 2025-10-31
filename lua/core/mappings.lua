@@ -140,3 +140,12 @@ end, { desc = "Comment", noremap = true })
 map("n", "<leader>fb", ":buffer ")
 map("n", "<leader>ff", ":find ")
 map("n", "<leader>fg", ":copen | :silent :grep ")
+
+-- auto complete
+map("i", "<C-Space>", "<C-x><C-o>", { noremap = true, silent = true })
+map("i", "<Tab>", function()
+	return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
+end, { expr = true, noremap = true })
+map("i", "<S-Tab>", function()
+	return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
+end, { expr = true, noremap = true })
