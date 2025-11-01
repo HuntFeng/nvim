@@ -30,4 +30,3 @@ opt.wildignore = opt.wildignore + {
 	".*/*",
 	"build/*",
 }
-opt.completeopt = "menu,menuone,noselect"
