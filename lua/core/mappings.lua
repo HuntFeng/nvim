@@ -3,15 +3,15 @@ vim.g.maplocalleader = ","
 local map = vim.keymap.set
 
 -- autopairs
-map("i", "(", "()<Left>")
-map("i", "[", "[]<Left>")
-map("i", "{", "{}<Left>")
-map("i", "<", "<><Left>")
-map("i", '"', '""<Left>')
-map("i", "'", "''<Left>")
-map("i", "`", "``<Left>")
-map("i", "$", "$$<Left>")
-map("i", "/*", "/**/<Left>")
+-- map("i", "(", "()<Left>")
+-- map("i", "[", "[]<Left>")
+-- map("i", "{", "{}<Left>")
+-- map("i", "<", "<><Left>")
+-- map("i", '"', '""<Left>')
+-- map("i", "'", "''<Left>")
+-- map("i", "`", "``<Left>")
+-- map("i", "$", "$$<Left>")
+-- map("i", "/*", "/**/<Left>")
 
 -- better escape
 map("i", "jk", "<esc>l", { silent = true })
