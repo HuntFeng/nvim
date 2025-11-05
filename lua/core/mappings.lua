@@ -56,10 +56,17 @@ map("n", "<cr>", function()
 	end
 end, { desc = "New line" })
 
+-- args
+map("n", "H", "<cmd>previous<cr>", { desc = "Prev Arg" })
+map("n", "L", "<cmd>next<cr>", { desc = "Next Arg" })
+map("n", "[a", "<cmd>previous<cr>", { desc = "Prev Arg" })
+map("n", "]a", "<cmd>next<cr>", { desc = "Next Arg" })
+map("n", "<leader>aa", "<cmd>argadd %<cr>", { desc = "Add current buffer to arglist" })
+map("n", "<leader>ad", "<cmd>argdelete %<cr>", { desc = "Delete current buffer from arglist" })
+
 -- buffers
-map("n", "<tab>", ":buffer ", { desc = "Choose Buffer" })
-map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+-- map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+-- map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>c", function()
@@ -135,17 +142,3 @@ end, { desc = "Comment", noremap = true })
 map("v", "<leader>/", function()
 	vim.cmd.normal("gc")
 end, { desc = "Comment", noremap = true })
-
--- fuzzy find (need to have blink)
-map("n", "<leader>fb", ":buffer ")
-map("n", "<leader>ff", ":find ")
-map("n", "<leader>fg", ":copen | :silent :grep ")
-
--- auto complete
-map("i", "<C-Space>", "<C-x><C-o>", { noremap = true, silent = true })
-map("i", "<Tab>", function()
-	return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
-end, { expr = true, noremap = true })
-map("i", "<S-Tab>", function()
-	return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
-end, { expr = true, noremap = true })
