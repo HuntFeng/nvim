@@ -4,8 +4,8 @@
 # xclip for system clipboard
 # ripgrep for searching
 # fzf for fuzzy find
-# python for some language servers
-# n for nodejs and npm (for some language servers)
+# python for some lsps / formatters (clang-format)
+# n for nodejs and npm for some lsps/ formatters (copilot)
 apt-get update \
 && cd /opt \
 && wget https://github.com/neovim/neovim/releases/download/v0.11.1/nvim-linux-x86_64.tar.gz \
