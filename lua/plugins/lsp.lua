@@ -1,7 +1,6 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = "VeryLazy",
 		config = function()
 			local servers = {
 				lua_ls = {
