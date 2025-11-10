@@ -7,6 +7,7 @@ opt.shiftwidth = 2
 opt.linebreak = true -- wrap line after word
 opt.expandtab = true
 opt.autoindent = true
+opt.smartindent = true
 opt.ignorecase = true
 opt.smartcase = true
 opt.signcolumn = "yes" -- always show signcolumn for lsp diags
