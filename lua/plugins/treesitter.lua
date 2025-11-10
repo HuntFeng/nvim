@@ -7,7 +7,7 @@ return {
 		configs.setup({
 			-- ensure_installed = { "vimdoc", "lua", "python", "javascript", "typescript", "html", "css", "vue" },
 			highlight = { enable = true },
-			indent = { enable = true },
+			indent = { enable = true, disable = { "cpp" } },
 		})
 	end,
 }
