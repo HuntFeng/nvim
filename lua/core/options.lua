@@ -23,3 +23,4 @@ opt.foldcolumn = "0" -- hide fold column
 opt.foldlevelstart = 99 -- open all folds by default
 opt.foldenable = true -- enable folding
 opt.winborder = "single" -- border for floating windows
+opt.swapfile = false -- disable swapfile
