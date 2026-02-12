@@ -24,3 +24,4 @@ opt.foldlevelstart = 99 -- open all folds by default
 opt.foldenable = true -- enable folding
 opt.winborder = "single" -- border for floating windows
 opt.swapfile = false -- disable swapfile
+opt.cursorline = true -- highlight cursoe line
