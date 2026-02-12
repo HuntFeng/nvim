@@ -60,7 +60,9 @@ return {
 			},
 		})
 
-		vim.keymap.set("n", "<leader>fw", "<cmd>FzfLua live_grep<cr>", { desc = "Grep (rg)" })
+		vim.keymap.set("n", "<leader>f", "<cmd>FzfLua files<cr>", { desc = "Files" })
+		vim.keymap.set("n", "<leader>g", "<cmd>FzfLua live_grep<cr>", { desc = "Grep (rg)" })
+		vim.keymap.set("n", "<leader>fg", "<cmd>FzfLua live_grep<cr>", { desc = "Grep (rg)" })
 		vim.keymap.set("n", "<leader>fb", "<cmd>FzfLua buffers<cr>", { desc = "Buffers" })
 		vim.keymap.set("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "Files" })
 		vim.keymap.set("n", "<leader>fm", "<cmd>FzfLua marks<cr>", { desc = "Marks" })

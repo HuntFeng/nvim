@@ -144,4 +144,4 @@ map("v", "<leader>/", function()
 end, { desc = "Comment", noremap = true })
 
 -- grep
-map("n", "<leader>g", ":copen | :silent :grep ")
+-- map("n", "<leader>g", ":copen | :silent :grep ")
