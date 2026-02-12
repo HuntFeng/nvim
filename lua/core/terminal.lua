@@ -33,22 +33,26 @@ local function toggle_terminal()
 		-- Create new terminal buffer
 		term_bufnr = vim.api.nvim_create_buf(false, true)
 		term_winid = vim.api.nvim_open_win(term_bufnr, true, center_float_opts(term_width, term_height))
-		vim.api.nvim_buf_set_option(term_bufnr, "buflisted", false)
-		vim.fn.termopen(vim.o.shell)
+		vim.api.nvim_set_option_value("buflisted", false, { buf = term_bufnr })
+		vim.fn.jobstart(vim.o.shell, { term = true })
 		vim.cmd("startinsert")
 	end
 end
 
-vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]])
-vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]])
-vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]])
-vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]])
+vim.api.nvim_create_autocmd("TermOpen", {
+	callback = function()
+		vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]])
+		vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]])
+		vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]])
+		vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]])
+		vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
+		vim.keymap.set("n", "q", function()
+			local curr_buf = vim.api.nvim_get_current_buf()
+			if vim.bo[curr_buf].buftype == "terminal" then
+				vim.api.nvim_win_close(0, true)
+			end
+		end, { buffer = true })
+	end,
+})
 vim.keymap.set({ "n", "t" }, "<C-/>", toggle_terminal, { desc = "Toggle terminal" })
 vim.keymap.set({ "n", "t" }, "<C-_>", toggle_terminal, { desc = "Toggle terminal" })
-vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
-vim.keymap.set("n", "q", function()
-	local curr_buf = vim.api.nvim_get_current_buf()
-	if vim.bo[curr_buf].buftype == "terminal" then
-		vim.api.nvim_win_close(0, true)
-	end
-end)
