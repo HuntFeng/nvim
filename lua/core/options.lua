@@ -25,3 +25,15 @@ opt.foldenable = true -- enable folding
 opt.winborder = "single" -- border for floating windows
 opt.swapfile = false -- disable swapfile
 opt.cursorline = true -- highlight cursoe line
+
+function _G.find_file(cmd_arg)
+	local cmd = "fd -t f -H -E '.git/**' ."
+	if vim.trim(cmd_arg) ~= "" then
+		cmd = cmd .. " | fzf --filter " .. cmd_arg
+	end
+	local files = vim.fn.systemlist(cmd)
+	return files
+end
+vim.o.findfunc = "v:lua.find_file"
+opt.grepprg =
+	"rg --vimgrep --no-heading --smart-case --glob '!.git/*' --glob '!node_modules/*' --glob '!venv/*' --glob '!.*/*'"
