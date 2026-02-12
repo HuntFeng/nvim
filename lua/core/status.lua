@@ -29,12 +29,20 @@ function M.hlcount()
 	return hi_pattern:format("WarningMsg", txt)
 end
 
+function M.macro_recording()
+	if vim.fn.reg_recording() ~= "" then
+		return hi_pattern:format("MoreMsg", "Recording @" .. vim.fn.reg_recording() .. " ")
+	end
+	return ""
+end
+
 local statusline = {
 	'%{%v:lua._statusline_component("git_branch")%}', -- git branch
 	"%f", -- relative file path
 	"%m", -- modified flag
 	"%=", -- separator
 	'%{%v:hlsearch ? v:lua._statusline_component("hlcount") : ""%}', -- highlight count
+	'%{%v:lua._statusline_component("macro_recording")%}', -- recording
 	"%l:%c", -- cursor position,
 }
 
