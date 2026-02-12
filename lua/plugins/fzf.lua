@@ -70,6 +70,7 @@ return {
 		vim.keymap.set("n", "<leader>fo", "<cmd>FzfLua lsp_outgoing_calls<cr>", { desc = "LSP Outgoing Calls" })
 		vim.keymap.set("n", "<leader>fs", "<cmd>FzfLua lsp_workspace_symbols<cr>", { desc = "LSP Workspace Symbols" })
 		vim.keymap.set("n", "<leader>fd", "<cmd>FzfLua lsp_workspace_diagnostics<cr>", { desc = "LSP Diagnostics" })
-		vim.keymap.set("n", "<Tab>", "<cmd>FzfLua args<cr>", { desc = "Args list" })
+		-- vim.keymap.set("n", "<Tab>", "<cmd>FzfLua args<cr>", { desc = "Args list" })
+		vim.keymap.set("n", "<Tab>", "<cmd>FzfLua buffers<cr>", { desc = "Buffer list" })
 	end,
 }
