@@ -3,7 +3,8 @@
 ## Requirements
 
 - `xclip` for global clipboard
-- `ripgrep` for better searching.
+- `ripgrep` for better searching
+- `fd-find` for faster file finding (`fd` command)
 
 ## LSP Servers
 
