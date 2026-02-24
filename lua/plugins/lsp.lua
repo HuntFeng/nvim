@@ -18,7 +18,21 @@ return {
 						},
 					},
 				},
-				pyright = {},
+				basedpyright = {
+					settings = {
+						basedpyright = {
+							analysis = {
+								typeCheckingMode = "off",
+								diagnosticSeverityOverrides = {
+									reportUnusedExpression = "hint",
+									reportUnusedVariable = "hint",
+									reportUnusedFunction = "hint",
+									reportUnusedClass = "hint",
+								},
+							},
+						},
+					},
+				},
 				ts_ls = {
 					filetypes = {
 						"javascript",
