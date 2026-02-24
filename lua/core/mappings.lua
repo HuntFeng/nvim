@@ -57,18 +57,19 @@ map("n", "<cr>", function()
 end, { desc = "New line" })
 
 -- args
-map("n", "H", "<cmd>previous<cr>", { desc = "Prev Arg" })
-map("n", "L", "<cmd>next<cr>", { desc = "Next Arg" })
-map("n", "[a", "<cmd>previous<cr>", { desc = "Prev Arg" })
-map("n", "]a", "<cmd>next<cr>", { desc = "Next Arg" })
-map("n", "<leader>aa", "<cmd>argadd %<cr>", { desc = "Add current buffer to arglist" })
-map("n", "<leader>ad", "<cmd>argdelete %<cr>", { desc = "Delete current buffer from arglist" })
+-- map("n", "H", "<cmd>previous<cr>", { desc = "Prev Arg" })
+-- map("n", "L", "<cmd>next<cr>", { desc = "Next Arg" })
+-- map("n", "[a", "<cmd>previous<cr>", { desc = "Prev Arg" })
+-- map("n", "]a", "<cmd>next<cr>", { desc = "Next Arg" })
+-- map("n", "<leader>aa", "<cmd>argadd %<cr>", { desc = "Add current buffer to arglist" })
+-- map("n", "<leader>ad", "<cmd>argdelete %<cr>", { desc = "Delete current buffer from arglist" })
 
 -- buffers
--- map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
--- map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "<tab>", ":buffer ", { desc = "Buffer" })
 map("n", "<leader>c", function()
 	-- Close current buffer (and switch to alternate if there is any)
 	-- but keep the current window open
