@@ -44,6 +44,10 @@ local finder_state = {
 	preview_start_line = 1,
 	ns_id = vim.api.nvim_create_namespace("fuzzyfind_results"),
 	closing = false,
+	-- For generic picker mode
+	custom_items = nil,
+	on_select_callback = nil,
+	picker_title = nil,
 }
 
 local function build_find_command(pattern)
@@ -221,6 +225,38 @@ local function search_combined(pattern)
 	return results
 end
 
+local function search_custom_items(pattern)
+	if not finder_state.custom_items then
+		return {}
+	end
+	
+	pattern = pattern or ""
+	local results = {}
+	
+	for i, item in ipairs(finder_state.custom_items) do
+		local text = type(item) == "table" and (item.text or item.label or tostring(item)) or tostring(item)
+		local matches, score = fuzzy_match(text, pattern)
+		if matches then
+			table.insert(results, {
+				type = "custom",
+				index = i,
+				text = text,
+				score = score,
+				value = item,
+			})
+		end
+		if #results >= config.max_results then
+			break
+		end
+	end
+	
+	table.sort(results, function(a, b)
+		return a.score ~= b.score and a.score > b.score or a.text < b.text
+	end)
+	
+	return results
+end
+
 local function format_result(filepath, is_selected, is_match)
 	local filename = vim.fn.fnamemodify(filepath, ":t")
 	local dir_path = vim.fn.fnamemodify(filepath, ":h")
@@ -247,6 +283,11 @@ local function format_grep_match(match, is_selected)
 		text = text:sub(1, cut_len) .. "..."
 	end
 	return string.format("%s%d: %s", prefix, match.lnum, text)
+end
+
+local function format_custom_item(text, is_selected)
+	local prefix = is_selected and "❯ " or "  "
+	return prefix .. text
 end
 
 local function get_selected_item()
@@ -278,9 +319,15 @@ local function update_preview()
 		return
 	end
 
+	-- For custom picker items, don't show file preview
+	if selected_item.type == "custom" or finder_state.mode == "picker" then
+		set_buf_content({ "No preview available" })
+		return
+	end
+
 	local filepath = selected_item.filepath or selected_item.filename
-	if vim.fn.filereadable(filepath) ~= 1 then
-		set_buf_content({ "File not readable: " .. filepath })
+	if not filepath or vim.fn.filereadable(filepath) ~= 1 then
+		set_buf_content({ filepath and ("File not readable: " .. filepath) or "No file to preview" })
 		return
 	end
 
@@ -406,6 +453,16 @@ local function update_results_display()
 					line_data = { prefix_len = 4 },
 				})
 			end
+		elseif result.type == "custom" or finder_state.mode == "picker" then
+			selectable_idx = selectable_idx + 1
+			local line = format_custom_item(result.text, selectable_idx == finder_state.selected_idx)
+			table.insert(lines, line)
+			add_selectable_item(lines, selectable_items, line_data, selectable_idx, i, "custom", {
+				value = result.value,
+				text = result.text,
+				index = result.index,
+				line_data = { text = result.text, prefix_len = 2 },
+			})
 		end
 	end
 
@@ -512,6 +569,28 @@ local function update_results_display()
 					search_pos = match_end + 1
 				end
 			end
+		elseif data.type == "custom" then
+			if is_selected then
+				vim.hl.range(
+					finder_state.results_buf,
+					finder_state.ns_id,
+					"Visual",
+					{ line_idx, 0 },
+					{ line_idx, -1 },
+					{}
+				)
+			end
+			
+			local prefix = is_selected and "❯ " or "  "
+			local text_start = #prefix
+			vim.hl.range(
+				finder_state.results_buf,
+				finder_state.ns_id,
+				"Normal",
+				{ line_idx, text_start },
+				{ line_idx, -1 },
+				{}
+			)
 		end
 	end
 
@@ -556,6 +635,8 @@ local function update_results()
 			return
 		end
 		results = search_combined(query)
+	elseif finder_state.mode == "picker" then
+		results = search_custom_items(query)
 	end
 
 	finder_state.results = results
@@ -634,6 +715,20 @@ local function accept_selection()
 		return
 	end
 
+	if finder_state.mode == "picker" then
+		local callback = finder_state.on_select_callback
+		local value = selected_item.value
+		local index = selected_item.index
+		close_finder()
+		
+		if callback then
+			vim.schedule(function()
+				callback(value, index)
+			end)
+		end
+		return
+	end
+
 	local filepath = selected_item.filepath or selected_item.filename
 	local lnum, col = selected_item.lnum, selected_item.col or 1
 	close_finder()
@@ -660,7 +755,10 @@ local function open_finder(mode)
 	end
 	finder_state.results_width = results_width
 
-	local title = mode == "file" and " Find File " or mode == "grep" and " Live Grep " or " Search "
+	local title = mode == "file" and " Find File " 
+		or mode == "grep" and " Live Grep " 
+		or mode == "picker" and (finder_state.picker_title or " Select ")
+		or " Search "
 
 	local input_buf = vim.api.nvim_create_buf(false, true)
 	local input_win = vim.api.nvim_open_win(input_buf, true, {
@@ -798,10 +896,25 @@ local function open_finder(mode)
 		end,
 	})
 
-	if mode == "file" or mode == "combined" then
+	if mode == "file" or mode == "combined" or mode == "picker" then
 		update_results()
 	end
 	vim.cmd("startinsert")
+end
+
+local function picker(items, opts)
+	opts = opts or {}
+	
+	if not items or #items == 0 then
+		vim.notify("No items to pick from", vim.log.levels.WARN)
+		return
+	end
+	
+	finder_state.custom_items = items
+	finder_state.on_select_callback = opts.on_select
+	finder_state.picker_title = opts.title or " Select "
+	
+	open_finder("picker")
 end
 
 local function get_preview_line_num()
@@ -814,5 +927,7 @@ end, { desc = "Find (Files & Content)" })
 
 return {
 	open_finder = open_finder,
+	picker = picker,
 	get_preview_line_num = get_preview_line_num,
+	search_files = search_files,
 }
