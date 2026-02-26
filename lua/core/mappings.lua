@@ -69,7 +69,7 @@ map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "<tab>", ":buffer ", { desc = "Buffer" })
+-- map("n", "<tab>", ":buffer ", { desc = "Buffer" })
 map("n", "<leader>c", function()
 	-- Close current buffer (and switch to alternate if there is any)
 	-- but keep the current window open

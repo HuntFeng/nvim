@@ -22,31 +22,7 @@ return {
 		},
 		selector = {
 			---@param selector avante.ui.Selector
-			provider = function(selector)
-				local picker = require("core.fuzzyfind").picker
-
-				-- Convert avante.ui.SelectorItem to picker format
-				local picker_items = {}
-				for _, item in ipairs(selector.items) do
-					table.insert(picker_items, {
-						id = item.id,
-						text = item.title,
-						label = item.title,
-					})
-				end
-
-				picker(picker_items, {
-					title = selector.title or " Select Provider ",
-					on_select = function(selected_item, index)
-						if selected_item then
-							local selected_id = selected_item.id
-							selector.on_select({ selected_id })
-						else
-							selector.on_select(nil)
-						end
-					end,
-				})
-			end,
+			provider = "telescope",
 		},
 	},
 	dependencies = {
