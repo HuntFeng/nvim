@@ -49,6 +49,8 @@ return {
 				clangd = {},
 				tinymist = {},
 				marksman = {},
+				csharp_ls = {},
+				texlab = {},
 			}
 
 			for name, config in pairs(servers) do
@@ -106,8 +108,10 @@ return {
 					markdown = { "prettierd" },
 					cpp = { "clang_format" },
 					c = { "clang_format" },
+					cs = { "csharppier" },
 					typst = { "typstyle" },
 					toml = { "taplo" },
+					tex = { "latexindent" },
 				},
 				formatters = {
 					isort = {
