@@ -37,12 +37,13 @@ function M.macro_recording()
 end
 
 local statusline = {
-	'%{%v:lua._statusline_component("git_branch")%}', -- git branch
+	'%{%v:lua._statusline_component("git_branch")%}',
 	"%f", -- relative file path
 	"%m", -- modified flag
 	"%=", -- separator
-	'%{%v:hlsearch ? v:lua._statusline_component("hlcount") : ""%}', -- highlight count
-	'%{%v:lua._statusline_component("macro_recording")%}', -- recording
+	"%{%v:lua.vim.diagnostic.status()%} ",
+	'%{%v:hlsearch ? v:lua._statusline_component("hlcount") : ""%}',
+	'%{%v:lua._statusline_component("macro_recording")%}',
 	"%l:%c", -- cursor position,
 }
 
