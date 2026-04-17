@@ -14,7 +14,6 @@ local function center_float_opts(width, height)
 		col = col,
 		row = row,
 		style = "minimal",
-		border = "rounded",
 	}
 end
 
@@ -41,10 +40,6 @@ end
 
 vim.api.nvim_create_autocmd("TermOpen", {
 	callback = function()
-		vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]])
-		vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]])
-		vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]])
-		vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]])
 		vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
 		vim.keymap.set("n", "q", function()
 			local curr_buf = vim.api.nvim_get_current_buf()
