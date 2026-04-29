@@ -1,7 +1,6 @@
 return {
 	-- display image in neovim
 	"3rd/image.nvim",
-	-- dir = "~/projects/image.nvim",
 	build = false,
 	opts = {},
 	config = function()
@@ -12,6 +11,7 @@ return {
 			max_width_window_percentage = 100,
 			max_height_window_percentage = 100,
 			window_overlap_clear_enabled = true,
+			scale_factor = 2.0,
 			integrations = {
 				typst = {
 					enabled = false,
