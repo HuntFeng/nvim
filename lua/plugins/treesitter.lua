@@ -7,7 +7,7 @@ return {
 		config = function()
 			vim.api.nvim_create_autocmd("BufReadPost", {
 				callback = function()
-					vim.treesitter.start()
+					pcall(vim.treesitter.start)
 				end,
 			})
 			vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
