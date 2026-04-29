@@ -22,8 +22,12 @@ map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-map("n", "[[", "#")
-map("n", "]]", "*")
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function()
+		map("n", "[[", "#", { buffer = true })
+		map("n", "]]", "*", { buffer = true })
+	end,
+})
 map("v", "K", ":m '<-2<CR>gv-gv", { desc = "Move selection up" })
 map("v", "J", ":m '>+1<CR>gv-gv", { desc = "Move selection down" })
 map("v", "H", "<gv", { desc = "Move selection left" })
