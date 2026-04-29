@@ -129,6 +129,17 @@ return {
 									"--offset-encoding=utf-16",
 								},
 							}
+						elseif server_name == "tinymist" then
+							opts = {
+								single_file_support = true,
+								root_dir = function()
+									return vim.fn.getcwd()
+								end,
+								settings = {
+									exportPdf = "onType",
+									outputPath = "$root/$dir/$name",
+								},
+							}
 						end
 						lspconfig[server_name].setup(opts)
 					end,
