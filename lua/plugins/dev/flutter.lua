@@ -49,6 +49,7 @@ return {
 				neotest.run.run({ strategy = "dap" })
 			end, { desc = "Run nearest test with dap" })
 			vim.keymap.set("n", "<leader>ts", ":Neotest summary<CR>", { desc = "Test Summary" })
+			vim.keymap.set("n", "<leader>to", ":Neotest output-panel<CR>", { desc = "Test Output (Panel)" })
 		end,
 	},
 }
