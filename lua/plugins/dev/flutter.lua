@@ -22,8 +22,7 @@ return {
 		dependencies = {
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-neotest/neotest-vim-test",
-			-- "sidlatau/neotest-dart",
-			{ dir = "~/projects/neotest-dart" },
+			"huntf-bitstrata/neotest-dart",
 		},
 		event = "VeryLazy",
 		config = function()
