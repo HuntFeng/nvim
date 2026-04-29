@@ -1,26 +1,41 @@
 #!/bin/bash
-# run this script as root
+cd ~/.local
+
+# neovim
+wget https://github.com/neovim/neovim/releases/download/v0.12.1/nvim-linux-x86_64.tar.gz
+mkdir nvim 
+tar -xzvf nvim-linux-x86_64.tar.gz -C nvim --strip-components=1
+ln -s ~/.local/nvim/bin/nvim ~/.local/bin/nvim
+rm -rf ~/.local/nvim-linux-x86_64.tar.gz
+
+# ripgrep for grep searching
+wget https://github.com/BurntSushi/ripgrep/releases/download/15.1.0/ripgrep-15.1.0-x86_64-unknown-linux-musl.tar.gz 
+tar -xzvf ripgrep-15.1.0-x86_64-unknown-linux-musl.tar.gz 
+mv ~/.local/ripgrep-15.1.0-x86_64-unknown-linux-musl/rg ~/.local/bin/rg 
+rm -rf ~/.local/ripgrep-15.1.0-x86_64-unknown-linux-musl.tar.gz
+rm -rf ~/.local/ripgrep-15.1.0-x86_64-unknown-linux-musl
+
+# uv and python for some lsps / formatters (clang-format)
+wget -qO- https://astral.sh/uv/install.sh | sh
+uv python install 3.13 --default
+
+# n for nodejs and npm for some lsps/ formatters (copilot)
+curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s install lts \
+
+# tree-sitter for better syntax highlighting
+wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.8/tree-sitter-cli-linux-x86.zip 
+unzip tree-sitter-cli-linux-x86.zip 
+mv tree-sitter-cli-linux-x86/tree-sitter ~/.local/bin/tree-sitter 
+rm -rf ~/.local/tree-sitter-cli-linux-x86.zip
+rm -rf ~/.local/tree-sitter-cli-linux-x86
 
 # xclip for system clipboard
-# ripgrep for grep searching
-# fd for file searching (need to be renamed to fd to avoid conflict with the fd command in coreutils)
-# python for some lsps / formatters (clang-format)
-# n for nodejs and npm for some lsps/ formatters (copilot)
-# tree-sitter for better syntax highlighting 
-apt-get update \
-&& cd /opt \
-&& wget https://github.com/neovim/neovim/releases/download/v0.12.1/nvim-linux-x86_64.tar.gz \
-&& mkdir nvim \
-&& tar -xzvf nvim-linux-x86_64.tar.gz -C nvim --strip-components=1 \
-&& ln -s /opt/nvim/bin/nvim /usr/bin/nvim \
-&& rm -rf /opt/nvim-linux-x86_64.tar.gz
-&& apt-get install -y xclip \
-&& apt-get install -y fd-find \
-&& ln -s $(which fdfind) ~/.local/bin/fd \ 
-&& apt-get install -y ripgrep \
-&& apt-get install -y python3 python3-pip python3-venv \
-&& curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s install lts \
-&& wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.8/tree-sitter-cli-linux-x86.zip \
-&& unzip tree-sitter-cli-linux-x86.zip \
-&& mv tree-sitter-cli-linux-x86/tree-sitter /usr/bin/treesitter \
-
+wget https://github.com/astrand/xclip/archive/refs/tags/0.13.tar.gz
+tar -xvzf xclip-0.13.tar.gz
+cd xclip-0.13
+./configure --prefix=~/.local --disable-shared
+make
+make install
+cd ..
+rm -rf ~/.local/xclip-0.13.tar.gz
+rm -rf ~/.local/xclip-0.13
