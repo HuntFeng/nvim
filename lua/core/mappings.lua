@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = ","
 local map = vim.keymap.set
 
 -- better escape
@@ -35,7 +35,13 @@ map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Wi
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Move Lines
-map("n", "<cr>", "o<esc>", { desc = "New line" })
+map("n", "<cr>", function()
+	if vim.bo.filetype == "qf" then
+		vim.api.nvim_input("V<cr>")
+	else
+		vim.cmd("normal! o")
+	end
+end, { desc = "New line" })
 
 -- buffers
 map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
