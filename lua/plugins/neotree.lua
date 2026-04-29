@@ -5,19 +5,8 @@ return {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
 		"nvim-tree/nvim-web-devicons",
-		{
-			-- display image in neovim
-			"3rd/image.nvim",
-			config = function()
-				package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua"
-				package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
-				require("image").setup({
-					backend = "kitty",
-					max_width_window_percentage = 100,
-					max_height_window_percentage = 100,
-				})
-			end,
-		},
+		-- display image in neovim
+		"3rd/image.nvim",
 	},
 	lazy = true,
 	config = function()

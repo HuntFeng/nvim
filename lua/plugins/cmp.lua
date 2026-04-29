@@ -44,9 +44,10 @@ return {
 				end,
 			},
 			formatting = {
-				-- in rust, if we don't set menu to "", it shows up as long white spaces
 				fields = { "abbr", "kind", "menu" },
 				format = function(entry, vim_item)
+					vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
+					-- in rust, if we don't set menu to "", it shows up as long white spaces
 					vim_item.menu = ""
 					return vim_item
 				end,
