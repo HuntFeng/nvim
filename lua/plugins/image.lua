@@ -1,6 +1,7 @@
 return {
 	-- display image in neovim
 	"3rd/image.nvim",
+	-- dir = "~/projects/image.nvim",
 	build = false,
 	opts = {},
 	config = function()
