@@ -4,6 +4,16 @@ return {
 		branch = "main",
 		build = ":TSUpdate",
 		event = "VeryLazy",
+		config = function()
+			vim.api.nvim_create_autocmd("BufReadPost", {
+				callback = function()
+					vim.treesitter.start()
+				end,
+			})
+			vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+			vim.opt.foldmethod = "expr"
+			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
