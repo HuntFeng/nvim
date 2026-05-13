@@ -53,6 +53,7 @@ return {
         marksman = {},
         csharp_ls = {},
         texlab = {},
+        gdscript = {},
       }
 
       for name, config in pairs(servers) do
