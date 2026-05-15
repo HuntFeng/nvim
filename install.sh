@@ -23,11 +23,9 @@ uv python install 3.13 --default
 curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s install lts \
 
 # tree-sitter for better syntax highlighting
-wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.8/tree-sitter-cli-linux-x86.zip 
-unzip tree-sitter-cli-linux-x86.zip 
-mv tree-sitter-cli-linux-x86/tree-sitter ~/.local/bin/tree-sitter 
-rm -rf ~/.local/tree-sitter-cli-linux-x86.zip
-rm -rf ~/.local/tree-sitter-cli-linux-x86
+# for Ubuntu 22.04 use 0.25.x
+# for Ubuntu 24.04 use 0.26.x
+npm -g install tree-sitter-cli@0.25
 
 # xclip for system clipboard
 wget https://github.com/astrand/xclip/archive/refs/tags/0.13.tar.gz
