@@ -3,7 +3,6 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",
 		build = ":TSUpdate",
-		event = "VeryLazy",
 		config = function()
 			vim.api.nvim_create_autocmd("BufReadPost", {
 				callback = function()
