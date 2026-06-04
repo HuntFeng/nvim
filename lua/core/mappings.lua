@@ -23,10 +23,10 @@ map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr =
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 vim.api.nvim_create_autocmd("FileType", {
-	callback = function()
-		map("n", "[[", "#", { buffer = true })
-		map("n", "]]", "*", { buffer = true })
-	end,
+  callback = function()
+    map("n", "[[", "#", { buffer = true })
+    map("n", "]]", "*", { buffer = true })
+  end,
 })
 map("v", "K", ":m '<-2<CR>gv-gv", { desc = "Move selection up" })
 map("v", "J", ":m '>+1<CR>gv-gv", { desc = "Move selection down" })
@@ -53,11 +53,11 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 
 -- Move Lines
 map("n", "<cr>", function()
-	if vim.bo.filetype == "qf" then
-		vim.api.nvim_input("<C-cr>")
-	else
-		vim.cmd("normal! o")
-	end
+  if vim.bo.filetype == "qf" then
+    vim.api.nvim_input("<C-cr>")
+  else
+    vim.cmd("normal! o")
+  end
 end, { desc = "New line" })
 
 -- args
@@ -74,46 +74,8 @@ map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 -- map("n", "<tab>", ":buffer ", { desc = "Buffer" })
-map("n", "<leader>c", function()
-	-- Close current buffer (and switch to alternate if there is any)
-	-- but keep the current window open
-	local curr_buf = vim.api.nvim_get_current_buf()
-	local alt_buf = vim.fn.bufnr("#")
-	local active_bufs = vim.tbl_map(function(buf)
-		return buf.bufnr
-	end, vim.fn.getbufinfo({ buflisted = 1 }))
-	local buftype = vim.bo[curr_buf].buftype
-	if buftype == "terminal" then
-		vim.cmd("bdelete! " .. curr_buf)
-	else
-		if vim.list_contains(active_bufs, alt_buf) then
-			-- if alternate buffer exists, switch to it
-			if vim.bo[curr_buf].modified then
-				vim.cmd("confirm bdelete " .. curr_buf)
-			else
-				vim.cmd("bdelete " .. curr_buf)
-			end
-			vim.cmd("buffer " .. alt_buf)
-		elseif #active_bufs > 1 then
-			-- else if there are other buffers, switch to the first one
-			for _, buf in ipairs(active_bufs) do
-				if buf ~= curr_buf then
-					if vim.bo[curr_buf].modified then
-						vim.cmd("confirm bdelete " .. curr_buf)
-					else
-						vim.cmd("bdelete " .. curr_buf)
-					end
-					vim.cmd("buffer " .. buf)
-					return
-				end
-			end
-		else
-			-- if this is the last buffer, just create a new empty buffer
-			vim.cmd("enew")
-			vim.cmd("bdelete " .. curr_buf)
-		end
-	end
-end, { noremap = true, desc = "Close Buffer" })
+map("n", "<leader>c", "<cmd>confirm bdelete<cr>", { desc = "Close Buffer", remap = true })
+map("n", "<leader>bd", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current" })
 
 -- windows
 map("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Delete Window", remap = true })
@@ -142,8 +104,8 @@ map({ "n", "i", "x", "s" }, "<A-z>", "<cmd>set wrap!<cr>", { desc = "Wrap text" 
 
 -- comment
 map("n", "<leader>/", function()
-	vim.cmd.normal("gcc")
+  vim.cmd.normal("gcc")
 end, { desc = "Comment", noremap = true })
 map("v", "<leader>/", function()
-	vim.cmd.normal("gc")
+  vim.cmd.normal("gc")
 end, { desc = "Comment", noremap = true })
