@@ -49,12 +49,28 @@ return {
         vue_ls = {},
         rust_analyzer = {},
         clangd = {
-          cmd = function(dispatchers, config)
-            local sif = vim.fs.find(function (name) return name:match("%.sif$") end)
+          cmd = function(dispatchers, _)
+            local sif = vim.fs.find(function(name)
+              return name:match("%.sif$")
+            end)
             if #sif > 0 then
-              return vim.lsp.rpc.start({ 'apptainer', 'exec', '--nv', '--no-home','--overlay', '/home/huntfeng/projects/vlasolver/.devcontainer/overlay', sif[1], 'clangd' }, dispatchers)
+              -- find .devcontainer/overlay relative to the .sif file
+              local devcontainer = vim.fs.find(".devcontainer", {
+                path = vim.fs.dirname(sif[1]),
+                upward = true,
+                type = "directory",
+              })
+              local args = { "apptainer", "exec", "--nv", "--no-home" }
+              if #devcontainer > 0 then
+                local overlay = vim.fs.joinpath(devcontainer[1], "overlay")
+                if vim.uv.fs_stat(overlay) then
+                  vim.list_extend(args, { "--overlay", overlay })
+                end
+              end
+              vim.list_extend(args, { sif[1], "clangd" })
+              return vim.lsp.rpc.start(args, dispatchers)
             else
-              return vim.lsp.rpc.start({ 'clangd' }, dispatchers)
+              return vim.lsp.rpc.start({ "clangd" }, dispatchers)
             end
           end,
         },
