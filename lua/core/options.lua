@@ -25,27 +25,27 @@ opt.foldenable = true -- enable folding
 opt.winborder = "single" -- border for floating windows
 opt.swapfile = false -- disable swapfile
 opt.cursorline = true -- highlight cursoe line
-opt.pumborder = "single"
-opt.completeopt = "fuzzy,menuone,popup,noselect"
-opt.autocomplete = true
-opt.complete = "o"
-
-vim.api.nvim_create_autocmd("ColorScheme", {
-	callback = function()
-		local colors = require("tokyonight.colors.night")
-		vim.api.nvim_set_hl(0, "Pmenu", {
-			bg = "NONE",
-		})
-		vim.api.nvim_set_hl(0, "PmenuSel", {
-			bg = colors.bg_highlight,
-			fg = colors.fg,
-		})
-		vim.api.nvim_set_hl(0, "PmenuMatch", {
-			fg = colors.blue,
-			bold = true,
-		})
-	end,
-})
+-- opt.pumborder = "single"
+-- opt.completeopt = "fuzzy,menuone,popup,noselect"
+-- opt.autocomplete = true
+-- opt.complete = "o"
+--
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+-- 	callback = function()
+-- 		local colors = require("tokyonight.colors.night")
+-- 		vim.api.nvim_set_hl(0, "Pmenu", {
+-- 			bg = "NONE",
+-- 		})
+-- 		vim.api.nvim_set_hl(0, "PmenuSel", {
+-- 			bg = colors.bg_highlight,
+-- 			fg = colors.fg,
+-- 		})
+-- 		vim.api.nvim_set_hl(0, "PmenuMatch", {
+-- 			fg = colors.blue,
+-- 			bold = true,
+-- 		})
+-- 	end,
+-- })
 
 function _G.find_file(cmd_arg)
 	local cmd = "fd -t f -H -E '.git/**' ."
