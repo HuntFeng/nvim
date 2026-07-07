@@ -12,14 +12,6 @@ function _G._statusline_component(name)
 	return M[name]()
 end
 
-function M.git_branch()
-	local branch = vim.fn.systemlist("git rev-parse --abbrev-ref HEAD")[1]
-	if branch and branch ~= "" and not branch:match("^fatal") then
-		return hi_pattern:format("Identifier", "  " .. branch .. " ")
-	end
-	return ""
-end
-
 function M.hlcount()
 	local ok, sc = pcall(vim.fn.searchcount, { maxcount = 9999, timeout = 50 })
 	if not ok or sc.incomplete ~= 0 or sc.total == 0 then
@@ -37,7 +29,6 @@ function M.macro_recording()
 end
 
 local statusline = {
-	'%{%v:lua._statusline_component("git_branch")%}',
 	"%f", -- relative file path
 	"%m", -- modified flag
 	"%=", -- separator
