@@ -39,12 +39,6 @@ map("n", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window", remap = tr
 map("n", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window", remap = true })
 map("n", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window", remap = true })
 
--- move cursor in insert mode using <ctrl>+hjkl
-map("i", "<C-h>", "<Left>", { desc = "Move Cursor Left", remap = true })
-map("i", "<C-j>", "<Down>", { desc = "Move Cursor Down", remap = true })
-map("i", "<C-k>", "<Up>", { desc = "Move Cursor Up", remap = true })
-map("i", "<C-l>", "<Right>", { desc = "Move Cursor Right", remap = true })
-
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
@@ -60,17 +54,7 @@ map("n", "<cr>", function()
   end
 end, { desc = "New line" })
 
--- args
--- map("n", "H", "<cmd>previous<cr>", { desc = "Prev Arg" })
--- map("n", "L", "<cmd>next<cr>", { desc = "Next Arg" })
--- map("n", "[a", "<cmd>previous<cr>", { desc = "Prev Arg" })
--- map("n", "]a", "<cmd>next<cr>", { desc = "Next Arg" })
--- map("n", "<leader>aa", "<cmd>argadd %<cr>", { desc = "Add current buffer to arglist" })
--- map("n", "<leader>ad", "<cmd>argdelete %<cr>", { desc = "Delete current buffer from arglist" })
-
 -- buffers
-map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 -- map("n", "<tab>", ":buffer ", { desc = "Buffer" })
@@ -89,12 +73,12 @@ map("n", "|", "<C-W>v", { desc = "Split Window Right", remap = true })
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
-map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
-map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
-map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+-- map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
+-- map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+-- map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+-- map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
+-- map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+-- map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
 -- save file
 map({ "x", "n", "s" }, "<leader>w", "<cmd>w<cr><esc>", { desc = "Save File" })
