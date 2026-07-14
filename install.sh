@@ -2,7 +2,8 @@
 cd ~/.local
 
 # neovim
-wget https://github.com/neovim/neovim/releases/download/v0.12.1/nvim-linux-x86_64.tar.gz
+# wget https://github.com/neovim/neovim/releases/download/v0.12.4/nvim-linux-x86_64.tar.gz
+wget https://github.com/neovim/neovim-releases/releases/download/v0.12.4/nvim-linux-x86_64.tar.gz # supports glibc 2.17
 mkdir nvim 
 tar -xzvf nvim-linux-x86_64.tar.gz -C nvim --strip-components=1
 ln -s ~/.local/nvim/bin/nvim ~/.local/bin/nvim
