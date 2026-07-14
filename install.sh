@@ -21,7 +21,8 @@ wget -qO- https://astral.sh/uv/install.sh | sh
 uv python install 3.13 --default
 
 # n for nodejs and npm for some lsps/ formatters (copilot)
-curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s install lts \
+export N_PREFIX=$HOME/.n
+curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s install lts
 
 # tree-sitter for better syntax highlighting
 # for Ubuntu 22.04 use 0.25.x
@@ -29,10 +30,11 @@ curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s install
 npm -g install tree-sitter-cli@0.25
 
 # xclip for system clipboard
-wget https://github.com/astrand/xclip/archive/refs/tags/0.13.tar.gz
+wget https://github.com/astrand/xclip/archive/refs/tags/0.13.tar.gz -O xclip-0.13.tar.gz
 tar -xvzf xclip-0.13.tar.gz
 cd xclip-0.13
-./configure --prefix=~/.local --disable-shared
+autoreconf
+./configure --prefix=$HOME/.local
 make
 make install
 cd ..
