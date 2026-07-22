@@ -40,3 +40,10 @@ make install
 cd ..
 rm -rf ~/.local/xclip-0.13.tar.gz
 rm -rf ~/.local/xclip-0.13
+
+# fd-find for faster finding (filebuf)
+wget https://github.com/sharkdp/fd/releases/download/v10.4.2/fd-v10.4.2-x86_64-unknown-linux-gnu.tar.gz
+tar -xvzf fd-v10.4.2-x86_64-unknown-linux-gnu
+mv ~/.local/fd-v10.4.2-x86_64-unknown-linux-gnu/fd ~/.local/bin/fd
+rm -rf ~/.local/fd-v10.4.2-x86_64-unknown-linux-gnu
+rm -rf ~/.local/fd-v10.4.2-x86_64-unknown-linux-gnu.tar.gz
