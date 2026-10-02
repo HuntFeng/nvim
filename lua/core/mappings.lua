@@ -47,11 +47,11 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 
 -- Move Lines
 map("n", "<cr>", function()
-  if vim.bo.filetype == "qf" then
-    vim.api.nvim_input("<C-cr>")
-  else
-    vim.cmd("normal! o")
-  end
+	if vim.bo.filetype == "qf" then
+		vim.api.nvim_input("<C-cr>")
+	else
+		vim.cmd("normal! o")
+	end
 end, { desc = "New line" })
 
 -- buffers
@@ -88,8 +88,48 @@ map({ "n", "i", "x", "s" }, "<A-z>", "<cmd>set wrap!<cr>", { desc = "Wrap text" 
 
 -- comment
 map("n", "<leader>/", function()
-  vim.cmd.normal("gcc")
+	vim.cmd.normal("gcc")
 end, { desc = "Comment", noremap = true })
 map("v", "<leader>/", function()
-  vim.cmd.normal("gc")
+	vim.cmd.normal("gc")
 end, { desc = "Comment", noremap = true })
+
+-- grep
+vim.keymap.set("n", "<leader>g", function()
+  local pat = vim.fn.input("Search > ")
+  if pat == "" then
+    return
+  end
+
+  -- 1. Find matching filenames
+  local files = vim.fn.systemlist("rg --files")
+  local fuzzy_files = vim.fn.matchfuzzy(files, pat)
+
+  local file_matches = {}
+
+  for _, file in ipairs(fuzzy_files) do
+    table.insert(file_matches, {
+      filename = file,
+      lnum = 1,
+      col = 1,
+      text = "[filename match]",
+    })
+  end
+
+  -- 2. Grep contents
+  vim.cmd("silent grep! " .. vim.fn.shellescape(pat))
+  local grep_matches = vim.fn.getqflist()
+
+  -- 3. Combine
+  local qf = {}
+
+  vim.list_extend(qf, file_matches)
+  vim.list_extend(qf, grep_matches)
+
+  vim.fn.setqflist({}, "r", {
+    title = "Search: " .. pat,
+    items = qf,
+  })
+
+  vim.cmd("copen")
+end, { desc = "Search filenames and contents" })

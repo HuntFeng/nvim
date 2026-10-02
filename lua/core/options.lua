@@ -53,3 +53,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank({ higroup = "Visual", timeout = 300 })
 	end,
 })
+opt.grepprg = "rg --vimgrep --smart-case"
