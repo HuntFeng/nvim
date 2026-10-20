@@ -1,1 +1,6 @@
-require("core")
+require("vim._core.ui2").enable()
+require("core.mappings")
+require("core.options")
+require("core.terminal")
+require("core.session")
+require("core.snippets")
