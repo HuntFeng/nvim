@@ -1,7 +1,6 @@
 vim.pack.add({
 	"https://github.com/williamboman/mason.nvim",
 	"https://github.com/neovim/nvim-lspconfig",
-	"https://github.com/stevearc/conform.nvim",
 })
 
 require("mason").setup()
@@ -78,34 +77,3 @@ vim.keymap.set("n", "gO", vim.lsp.buf.outgoing_calls, { desc = "Goto outgoing ca
 vim.keymap.set("n", "gI", vim.lsp.buf.incoming_calls, { desc = "Goto incoming calls" })
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Open diagnostic" })
 vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "Signature help" })
-
-require("conform").setup({
-	formatters_by_ft = {
-		lua = { "stylua" },
-		python = { "black", "isort" },
-		rust = { "rustfmt" },
-		javascript = { "prettierd" },
-		typescript = { "prettierd" },
-		javascriptreact = { "prettierd" },
-		typescriptreact = { "prettierd" },
-		vue = { "prettierd" },
-		css = { "prettierd" },
-		html = { "prettierd" },
-		json = { "prettierd" },
-		yaml = { "prettierd" },
-		markdown = { "prettierd" },
-		cpp = { "clang_format" },
-		c = { "clang_format" },
-		cs = { "csharppier" },
-		typst = { "typstyle" },
-		toml = { "taplo" },
-		tex = { "latexindent" },
-	},
-	formatters = {
-		isort = { prepend_args = { "--profile", "black" } },
-	},
-})
-
-vim.keymap.set("n", "grf", function()
-	require("conform").format({ lsp_fallback = true })
-end, { desc = "Format code" })
