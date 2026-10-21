@@ -37,29 +37,35 @@ local conf = require("telescope.config").values
 local make_entry = require("telescope.make_entry")
 
 local function search_everything()
-	pickers.new({}, {
-		prompt_title = "Search Everywhere",
-		finder = finders.new_job(function(prompt)
-			if prompt == "" then
-				return { "sh", "-c", "rg --files | sed 's|^|FILE\\t|'" }
-			end
+	pickers
+		.new({}, {
+			prompt_title = "Search Everywhere",
+			finder = finders.new_job(function(prompt)
+				if prompt == "" then
+					return { "sh", "-c", "rg --files | sed 's|^|FILE\\t|'" }
+				end
 
-			local cmd = string.format([[
+				local cmd = string.format(
+					[[
 (
   rg --files | rg -i '%s' | sed 's|^|FILE\t|'
   rg --vimgrep --smart-case '%s' 2>/dev/null
 )
-]], prompt, prompt)
-			return { "sh", "-c", cmd }
-		end, function(line)
-			if vim.startswith(line, "FILE\t") then
-				return make_entry.gen_from_file()(line:sub(6))
-			end
-			return make_entry.gen_from_vimgrep()(line)
-		end),
-		previewer = conf.grep_previewer({}),
-		sorter = conf.generic_sorter({}),
-	}):find()
+]],
+					prompt,
+					prompt
+				)
+				return { "sh", "-c", cmd }
+			end, function(line)
+				if vim.startswith(line, "FILE\t") then
+					return make_entry.gen_from_file()(line:sub(6))
+				end
+				return make_entry.gen_from_vimgrep()(line)
+			end),
+			previewer = conf.grep_previewer({}),
+			sorter = conf.generic_sorter({}),
+		})
+		:find()
 end
 
 vim.keymap.set("n", "<leader>f", search_everything)
